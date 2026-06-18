@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il Processo a Cristoforo Colombo – Fumetto</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Schoolbell&family=Patrick+Hand&family=Architects+Daughter&display=swap');
+
+:root {
+  --ink: #1a1008;
+  --paper: #fdf6e3;
+  --paper2: #fff9ed;
+  --lined: #e8f4ff;
+  --pencil: #4a3f2f;
+  --red: #c0392b;
+  --blue: #2471a3;
+  --green: #1e8449;
+  --orange: #d35400;
+  --purple: #7d3c98;
+  --yellow: #f1c40f;
+  --brown: #784212;
+  --border: #2c1a06;
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  background: #b0c4de;
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 27px, #9ab0cc 27px, #9ab0cc 28px
+  );
+  font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+  padding: 20px 10px 50px;
+}
+
+/* ── NOTEBOOK COVER ── */
+.notebook {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--paper);
+  border: 3px solid var(--pencil);
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: -8px 0 0 #8b6914, -10px 2px 8px rgba(0,0,0,.4), 6px 6px 18px rgba(0,0,0,.3);
+  position: relative;
+  padding-bottom: 40px;
+}
+
+/* spiral binding holes */
+.notebook::before {
+  content: '';
+  position: absolute;
+  left: -18px; top: 0; bottom: 0;
+  width: 14px;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px, transparent 22px,
+    #5a4020 22px, #5a4020 36px
+  );
+  border-radius: 4px 0 0 4px;
+}
+
+/* red margin line */
+.notebook::after {
+  content: '';
+  position: absolute;
+  left: 52px; top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(192,57,43,.35);
+  pointer-events: none;
+}
+
+/* ruled lines */
+.page-lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px, transparent 27px,
+    rgba(173,216,230,.5) 27px, rgba(173,216,230,.5) 28px
+  );
+  pointer-events: none;
+  border-radius: 0 12px 12px 0;
+}
+
+.content { position: relative; z-index: 1; padding: 0 22px 0 60px; }
+
+/* ── COVER PAGE ── */
+.cover-page {
+  text-align: center;
+  padding: 30px 20px 24px;
+  border-bottom: 2px dashed #b0996a;
+  margin-bottom: 10px;
+}
+.cover-sticker {
+  display: inline-block;
+  background: #ffe066;
+  border: 2px solid var(--pencil);
+  border-radius: 3px 12px 3px 12px;
+  padding: 4px 14px;
+  font-family: 'Schoolbell', cursive;
+  font-size: .75rem;
+  color: var(--brown);
+  transform: rotate(-2deg);
+  margin-bottom: 12px;
+  box-shadow: 2px 2px 0 #b09040;
+}
+.cover-title {
+  font-family: 'Schoolbell', cursive;
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  color: var(--red);
+  line-height: 1.1;
+  text-shadow: 2px 2px 0 #ffd0cc;
+  /* hand-drawn underline via border */
+  border-bottom: 4px solid var(--red);
+  display: inline-block;
+  padding-bottom: 4px;
+}
+.cover-sub {
+  font-family: 'Patrick Hand', cursive;
+  color: var(--blue);
+  font-size: 1.05rem;
+  margin-top: 10px;
+}
+.cover-meta {
+  margin-top: 14px;
+  font-size: .85rem;
+  color: var(--pencil);
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.cover-meta span { border-bottom: 1.5px solid var(--pencil); padding-bottom: 2px; }
+
+/* stars drawn by kids */
+.stars { color: var(--yellow); font-size: 1.1rem; margin-top: 6px; }
+
+/* ── SCENE HEADER ── */
+.scene-header {
+  font-family: 'Schoolbell', cursive;
+  font-size: 1.15rem;
+  color: var(--blue);
+  margin: 22px 0 10px;
+  padding: 4px 12px;
+  background: var(--lined);
+  border-left: 4px solid var(--blue);
+  border-radius: 0 6px 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.scene-icon { font-size: 1.2rem; }
+
+/* ── PANEL GRID ── */
+.strip { display: grid; gap: 8px; margin-bottom: 8px; }
+.s2 { grid-template-columns: 1fr 1fr; }
+.s3 { grid-template-columns: 1fr 1fr 1fr; }
+.s21 { grid-template-columns: 2fr 1fr; }
+.s12 { grid-template-columns: 1fr 2fr; }
+.s1 { grid-template-columns: 1fr; }
+.s211 { grid-template-columns: 2fr 1fr 1fr; }
+
+@media(max-width:560px){
+  .s2,.s3,.s21,.s12,.s211 { grid-template-columns: 1fr; }
+}
+
+/* ── PANEL ── */
+.panel {
+  background: var(--paper2);
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 180px;
+  /* hand-drawn border effect via box-shadow */
+  box-shadow: 3px 3px 0 var(--ink);
+}
+/* slight rotation on some panels */
+.panel.tilt-l { transform: rotate(-.4deg); }
+.panel.tilt-r { transform: rotate(.3deg); }
+
+/* ── PANEL CAPTION ── */
+.pcap {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Schoolbell', cursive;
+  font-size: .72rem;
+  padding: 3px 8px;
+  letter-spacing: .05em;
+}
+.pcap.red { background: var(--red); }
+.pcap.blue { background: var(--blue); }
+.pcap.green { background: var(--green); }
+.pcap.purple { background: var(--purple); }
+.pcap.brown { background: var(--brown); }
+.pcap.orange { background: var(--orange); }
+
+/* ── CHARACTER AREA ── */
+.char-area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 8px 10px 4px;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+.char-area svg { flex-shrink: 0; }
+
+/* ── SPEECH BUBBLES ── */
+.bubbles {
+  padding: 6px 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+.bub {
+  position: relative;
+  border: 2px solid var(--ink);
+  padding: 5px 9px 5px;
+  font-size: .8rem;
+  line-height: 1.38;
+  max-width: 96%;
+  background: white;
+  border-radius: 14px;
+}
+.bub.r { align-self: flex-end; border-radius: 14px 4px 14px 14px; background: #fff0f8; }
+.bub.l { align-self: flex-start; border-radius: 4px 14px 14px 14px; }
+.bub.narr {
+  align-self: stretch;
+  background: #fffff0;
+  border: 1.5px dashed var(--pencil);
+  border-radius: 4px;
+  font-style: italic;
+  font-size: .76rem;
+  color: #5a3a1a;
+}
+.bub .who {
+  font-family: 'Schoolbell', cursive;
+  font-size: .67rem;
+  display: block;
+  margin-bottom: 1px;
+}
+.bub.l .who { color: var(--red); }
+.bub.r .who { color: var(--blue); }
+
+/* panel number badge */
+.pnum {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 20px; height: 20px;
+  background: var(--yellow);
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  font-family: 'Schoolbell', cursive;
+  font-size: .7rem;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink);
+  z-index: 10;
+}
+
+/* ── DOODLE DECORATIONS ── */
+.doodle-row {
+  text-align: center;
+  font-size: 1.4rem;
+  margin: 4px 0;
+  opacity: .55;
+  letter-spacing: .15em;
+}
+
+/* ── FINAL BOX ── */
+.final-box {
+  margin: 18px 0 8px;
+  border: 3px solid var(--red);
+  border-radius: 8px;
+  background: #fff9f0;
+  padding: 14px 18px;
+  font-family: 'Schoolbell', cursive;
+  font-size: 1.05rem;
+  color: var(--red);
+  text-align: center;
+  line-height: 1.6;
+  box-shadow: 3px 3px 0 var(--red);
+}
+.final-box .sub {
+  font-family: 'Patrick Hand', cursive;
+  font-size: .82rem;
+  color: var(--pencil);
+  margin-top: 6px;
+  display: block;
+}
+
+/* ══ VIDEO PLAYER ══════════════════════════════════════════ */
+#vp-overlay {
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(8,5,2,.96);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Patrick Hand','Comic Sans MS',cursive;
+}
+#vp-overlay.hidden{display:none;}
+
+#vp-box {
+  position:relative;
+  width:min(840px,96vw);
+  max-height:95vh;
+  display:flex;flex-direction:column;
+  background:#fdf6e3;
+  border:3px solid #1a1008;
+  border-radius:10px;
+  box-shadow:0 0 60px rgba(0,0,0,.8);
+  overflow:hidden;
+}
+
+/* progress */
+#vp-prog-track{height:5px;background:#e0c88a;cursor:pointer;flex-shrink:0;}
+#vp-prog-fill{height:100%;background:linear-gradient(90deg,#c0392b,#e74c3c);width:0%;transition:width .35s linear;}
+
+/* panel */
+#vp-panel{padding:10px 14px 6px;display:flex;flex-direction:column;gap:6px;overflow:hidden;}
+#vp-cap{
+  font-family:'Schoolbell',cursive;font-size:.72rem;
+  color:#fdf6e3;background:#1a1008;
+  padding:2px 10px;border-radius:0 0 6px 6px;
+  align-self:flex-start;margin-top:-10px;margin-left:-14px;
+}
+#vp-svg{display:flex;justify-content:center;align-items:flex-start;}
+#vp-svg svg{max-width:100%;height:auto;max-height:240px;}
+
+/* dialogue */
+#vp-dlg{
+  background:white;border:2.5px solid #1a1008;border-radius:10px;
+  padding:10px 14px;display:flex;flex-direction:column;gap:5px;
+  min-height:80px;flex-shrink:0;
+}
+#vp-who{
+  font-family:'Schoolbell',cursive;font-size:.9rem;font-weight:bold;
+  transition:color .3s;
+}
+#vp-txt{font-size:.92rem;line-height:1.5;color:#1a1008;min-height:2.2em;}
+.w{display:inline;}
+.w.hi{color:#c0392b;font-weight:bold;}
+
+/* thumbnails */
+#vp-thumbs{
+  display:flex;gap:3px;overflow-x:auto;padding:5px 12px;
+  background:#120e06;flex-shrink:0;
+  scrollbar-width:thin;scrollbar-color:#4a3010 #120e06;
+}
+.vp-th{
+  flex-shrink:0;width:44px;height:33px;
+  background:#2c1a06;border:1.5px solid #4a3010;border-radius:4px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-family:'Schoolbell',cursive;font-size:.6rem;color:#8b6014;
+  overflow:hidden;transition:border-color .15s;
+}
+.vp-th:hover{border-color:#c8a850;}
+.vp-th.on{border-color:#c0392b;background:#3a0808;}
+.vp-th svg{width:44px;height:33px;pointer-events:none;}
+
+/* controls */
+#vp-ctrl{
+  background:#1a1008;padding:8px 14px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex-shrink:0;
+}
+.cb{
+  background:#2c2010;border:1.5px solid #8b6014;color:#f0d090;
+  border-radius:18px;padding:5px 13px;font-size:.78rem;
+  cursor:pointer;font-family:'Patrick Hand',cursive;
+  transition:background .12s;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.cb:hover{background:#4a3818;}
+.cb.pri{background:#c0392b;border-color:#e74c3c;color:#fff;}
+.cb.pri:hover{background:#e74c3c;}
+.cb:disabled{opacity:.35;cursor:default;}
+#vp-info{
+  font-family:'Schoolbell',cursive;font-size:.72rem;
+  color:#c8a850;margin-left:auto;white-space:nowrap;
+}
+#vp-speed{
+  background:#2c2010;border:1px solid #8b6014;color:#f0d090;
+  border-radius:8px;padding:3px 5px;font-size:.7rem;cursor:pointer;
+}
+
+/* speaking pulse */
+@keyframes spk{0%,100%{opacity:1;}50%{opacity:.45;}}
+.spk{animation:spk .55s ease-in-out infinite;}
+
+/* fade transition */
+#vp-panel{transition:opacity .25s;}
+#vp-panel.fade{opacity:0;}
+
+/* close */
+#vp-x{
+  position:absolute;top:7px;right:9px;z-index:10;
+  background:#c0392b;border:none;color:#fff;
+  border-radius:50%;width:26px;height:26px;
+  font-size:.8rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* launch button */
+#vp-launch{
+  position:fixed;bottom:22px;right:22px;z-index:8000;
+  background:linear-gradient(135deg,#c0392b,#e74c3c);
+  color:#fff;border:none;border-radius:26px;
+  padding:11px 20px;font-size:.92rem;
+  font-family:'Schoolbell',cursive;cursor:pointer;
+  box-shadow:0 4px 16px rgba(192,57,43,.5);
+  transition:transform .15s;
+  display:flex;align-items:center;gap:7px;
+}
+#vp-launch:hover{transform:scale(1.06);}
+
+/* Safari voice-unlock overlay */
+#vp-unlock{
+  position:absolute;inset:0;z-index:20;
+  background:rgba(10,6,2,.88);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;border-radius:10px;
+}
+#vp-unlock.hidden{display:none;}
+#vp-unlock h2{
+  font-family:'Schoolbell',cursive;font-size:1.3rem;color:#f0d090;
+  text-align:center;padding:0 20px;
+}
+#vp-unlock p{font-size:.85rem;color:#c8a850;text-align:center;padding:0 24px;}
+#vp-unlock-btn{
+  background:#c0392b;color:#fff;border:none;
+  border-radius:24px;padding:13px 32px;
+  font-family:'Schoolbell',cursive;font-size:1.1rem;
+  cursor:pointer;box-shadow:0 4px 16px rgba(192,57,43,.5);
+}
+
+</style>
+</head>
+<body>
+<div class="notebook">
+<div class="page-lines"></div>
+<div class="content">
+
+<!-- ══ COVER ══ -->
+<div class="cover-page">
+  <div class="cover-sticker">✏️ Classe 2ª · I.C. Alessandro Volta · Cotronei</div>
+  <div><span class="cover-title">IL PROCESSO A<br>CRISTOFORO COLOMBO</span></div>
+  <div class="cover-sub">🎭 Trasposizione teatrale in fumetto 🎭</div>
+  <div class="stars">★ ★ ★ ★ ★</div>
+  <div class="cover-meta">
+    <span>Materia: Storia</span>
+    <span>Anno scolastico 2025/26</span>
+    <span>Prof.ssa Castagnino Monia</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCENA I – APERTURA
+══════════════════════════════════ -->
+<div class="scene-header"><span class="scene-icon">⚖️</span> Scena I – Apertura del Processo</div>
+<div class="doodle-row">🏛️ ⚜️ 🕯️ ⚜️ 🏛️</div>
+
+<!-- pannello 1: narratore + aula -->
+<div class="strip s1">
+<div class="panel tilt-l">
+  <div class="pnum">1</div>
+  <div class="pcap blue">📜 Il Narratore – Anno del Signore 1500</div>
+  <div class="char-area">
+    <!-- SVG: Courtroom wide shot, hand-drawn style -->
+    <svg width="100%" viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg" style="max-width:520px">
+      <!-- floor -->
+      <rect x="0" y="130" width="520" height="30" fill="#d4b483" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- back wall, wavy hand-drawn -->
+      <path d="M0 130 L0 20 Q30 14 80 18 Q160 8 260 12 Q360 8 440 18 Q490 14 520 20 L520 130Z" fill="#f0e0c0" stroke="#1a1008" stroke-width="2"/>
+      <!-- window arches -->
+      <ellipse cx="120" cy="55" rx="32" ry="28" fill="#c8e8f8" stroke="#1a1008" stroke-width="1.5"/>
+      <line x1="120" y1="27" x2="120" y2="83" stroke="#1a1008" stroke-width="1"/>
+      <line x1="88" y1="55" x2="152" y2="55" stroke="#1a1008" stroke-width="1"/>
+      <ellipse cx="400" cy="55" rx="32" ry="28" fill="#c8e8f8" stroke="#1a1008" stroke-width="1.5"/>
+      <line x1="400" y1="27" x2="400" y2="83" stroke="#1a1008" stroke-width="1"/>
+      <line x1="368" y1="55" x2="432" y2="55" stroke="#1a1008" stroke-width="1"/>
+      <!-- judge bench, wobbly rect -->
+      <path d="M190 85 Q260 80 330 85 L328 130 H192Z" fill="#8b5e2a" stroke="#1a1008" stroke-width="2"/>
+      <rect x="196" y="76" width="128" height="14" rx="4" fill="#a06830" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- JUDGE figure – hand drawn style -->
+      <!-- body robe dark -->
+      <path d="M242 76 Q260 70 278 76 L282 130 H238Z" fill="#2a2860" stroke="#1a1008" stroke-width="1.8"/>
+      <!-- head round -->
+      <circle cx="260" cy="54" r="18" fill="#f5dcb0" stroke="#1a1008" stroke-width="2"/>
+      <!-- wig wavy -->
+      <path d="M242 50 Q250 28 260 26 Q270 28 278 50" fill="#e0ddd0" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M242 50 Q236 64 238 76" stroke="#e0ddd0" stroke-width="5" stroke-linecap="round"/>
+      <path d="M278 50 Q284 64 282 76" stroke="#e0ddd0" stroke-width="5" stroke-linecap="round"/>
+      <!-- eyes dots -->
+      <circle cx="253" cy="54" r="3" fill="#1a1008"/>
+      <circle cx="267" cy="54" r="3" fill="#1a1008"/>
+      <!-- eyebrow lines -->
+      <path d="M249 48 Q253 45 257 48" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+      <path d="M263 48 Q267 45 271 48" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+      <!-- serious mouth -->
+      <path d="M253 64 Q260 62 267 64" stroke="#8b5e2a" stroke-width="1.8" fill="none"/>
+      <!-- gavel -->
+      <rect x="268" y="78" width="6" height="22" rx="2" fill="#6a3a10" stroke="#1a1008" stroke-width="1" transform="rotate(15,268,78)"/>
+      <rect x="264" y="74" width="16" height="9" rx="3" fill="#4a2a08" stroke="#1a1008" stroke-width="1" transform="rotate(15,268,78)"/>
+      <!-- parchment on bench -->
+      <rect x="218" y="80" width="34" height="22" rx="3" fill="#fdf3d0" stroke="#1a1008" stroke-width="1"/>
+      <line x1="222" y1="87" x2="248" y2="87" stroke="#8b5e2a" stroke-width=".8"/>
+      <line x1="222" y1="93" x2="248" y2="93" stroke="#8b5e2a" stroke-width=".8"/>
+      <!-- left side crowd boxes -->
+      <rect x="14" y="92" width="60" height="38" rx="3" fill="#c09050" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="30" cy="88" r="9" fill="#f5dcb0" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="50" cy="90" r="9" fill="#d4956a" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- right crowd -->
+      <rect x="446" y="92" width="60" height="38" rx="3" fill="#c09050" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="462" cy="88" r="9" fill="#c87830" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="482" cy="90" r="9" fill="#e8c880" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- torches -->
+      <rect x="46" y="36" width="6" height="26" fill="#6a3a10" stroke="#1a1008" stroke-width="1"/>
+      <path d="M46 36 Q49 22 52 36Z" fill="#e87030"/>
+      <path d="M47 28 Q49 23 51 28Z" fill="#f8c050"/>
+      <rect x="468" y="36" width="6" height="26" fill="#6a3a10" stroke="#1a1008" stroke-width="1"/>
+      <path d="M468 36 Q471 22 474 36Z" fill="#e87030"/>
+      <path d="M469 28 Q471 23 473 28Z" fill="#f8c050"/>
+      <!-- text label -->
+      <text x="260" y="148" text-anchor="middle" font-family="'Patrick Hand',cursive" font-size="11" fill="#5a3a1a">Corte di Castiglia · Anno 1500</text>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub narr">«Anno del Signore 1500. Nella Corte di Castiglia, sotto lo sguardo vigile dei Sovrani Cattolici, si apre il processo a Cristoforo Colombo, Ammiraglio del Mare Oceano. Eroe o tiranno? Navigatore o Conquistatore? Il tribunale qui presente giudicherà.»</div>
+  </div>
+</div>
+</div>
+
+<!-- pannelli 2-3: Giudice apre + Colombo si presenta -->
+<div class="strip s2">
+<div class="panel">
+  <div class="pnum">2</div>
+  <div class="pcap blue">⚖️ Il Giudice apre il processo</div>
+  <div class="char-area">
+    <!-- JUDGE closeup hand-drawn -->
+    <svg width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
+      <!-- robe -->
+      <path d="M18 140 Q22 96 55 90 Q88 96 92 140Z" fill="#2a2860" stroke="#1a1008" stroke-width="2"/>
+      <!-- white collar -->
+      <path d="M38 92 Q55 86 72 92 L68 106 H42Z" fill="#f0f0e8" stroke="#1a1008" stroke-width="1.2"/>
+      <!-- head slightly oval, hand-drawn -->
+      <ellipse cx="55" cy="54" rx="22" ry="23" fill="#f5dcb0" stroke="#1a1008" stroke-width="2.2"/>
+      <!-- wig -->
+      <path d="M33 50 Q44 24 55 22 Q66 24 77 50" fill="#e0ddd0" stroke="#1a1008" stroke-width="1.8"/>
+      <path d="M33 50 Q26 66 30 82" stroke="#e0ddd0" stroke-width="6" stroke-linecap="round"/>
+      <path d="M77 50 Q84 66 80 82" stroke="#e0ddd0" stroke-width="6" stroke-linecap="round"/>
+      <!-- thick eyebrows serious -->
+      <path d="M39 50 Q44 45 49 49" stroke="#3a2010" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M61 49 Q66 45 71 50" stroke="#3a2010" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- eyes -->
+      <ellipse cx="44" cy="55" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="44" cy="56" r="2.5" fill="#1a1008"/>
+      <ellipse cx="66" cy="55" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="66" cy="56" r="2.5" fill="#1a1008"/>
+      <!-- nose simple bump -->
+      <path d="M53 58 Q55 64 57 58" stroke="#8b5e2a" stroke-width="1.2" fill="none"/>
+      <!-- tight lips -->
+      <path d="M44 70 Q55 67 66 70" stroke="#1a1008" stroke-width="1.8" fill="none"/>
+      <!-- gavel in hand -->
+      <path d="M72 100 Q82 88 86 78" stroke="#f5dcb0" stroke-width="8" stroke-linecap="round"/>
+      <rect x="82" y="70" width="18" height="10" rx="3" fill="#4a2a08" stroke="#1a1008" stroke-width="1.2" transform="rotate(20 82 70)"/>
+      <rect x="86" y="74" width="6" height="20" rx="2" fill="#6a3a10" stroke="#1a1008" stroke-width="1" transform="rotate(20 82 70)"/>
+      <!-- blush marks like kids draw -->
+      <circle cx="36" cy="60" r="5" fill="#ffb0b0" opacity=".5"/>
+      <circle cx="74" cy="60" r="5" fill="#ffb0b0" opacity=".5"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«In nome dei Re di Spagna, si apre oggi, in questa corte simbolica, il processo a Cristoforo Colombo.»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«La questione: con le sue gesta l'Ammiraglio si è fatto portatore di glorie o di distruzione? Saranno ascoltate testimonianze da entrambe le parti.»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Ammiraglio Colombo, si presenti!»</div>
+  </div>
+</div>
+
+<div class="panel tilt-r">
+  <div class="pnum">3</div>
+  <div class="pcap red">⚓ Cristoforo Colombo si presenta</div>
+  <div class="char-area">
+    <!-- COLOMBO proud, hand-drawn style -->
+    <svg width="110" height="150" viewBox="0 0 110 150" xmlns="http://www.w3.org/2000/svg">
+      <!-- red cape flowing -->
+      <path d="M14 150 Q18 102 55 94 Q92 102 96 150Z" fill="#c0392b" stroke="#1a1008" stroke-width="2"/>
+      <!-- cape fold -->
+      <path d="M14 150 Q24 120 30 100" stroke="#922b21" stroke-width="2" fill="none"/>
+      <!-- tunic underneath -->
+      <path d="M34 106 Q55 98 76 106 L72 130 H38Z" fill="#d4a040" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- belt -->
+      <rect x="32" y="118" width="46" height="7" rx="3" fill="#6a3a10" stroke="#1a1008" stroke-width="1.2"/>
+      <!-- head round, proud tilt -->
+      <ellipse cx="57" cy="52" rx="22" ry="22" fill="#f5dcb0" stroke="#1a1008" stroke-width="2.2" transform="rotate(5 57 52)"/>
+      <!-- dark wavy hair -->
+      <path d="M35 48 Q57 24 79 48" fill="#2a1808" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M35 48 Q28 60 30 74" stroke="#2a1808" stroke-width="6" stroke-linecap="round"/>
+      <path d="M79 48 Q86 60 84 74" stroke="#2a1808" stroke-width="6" stroke-linecap="round"/>
+      <!-- proud eyebrows up -->
+      <path d="M40 50 Q45 44 50 49" stroke="#2a1808" stroke-width="2" fill="none"/>
+      <path d="M64 49 Q69 44 74 50" stroke="#2a1808" stroke-width="2" fill="none"/>
+      <!-- eyes bright -->
+      <ellipse cx="45" cy="55" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="46" cy="56" r="2.5" fill="#2a1808"/>
+      <ellipse cx="69" cy="55" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="70" cy="56" r="2.5" fill="#2a1808"/>
+      <!-- light in eyes -->
+      <circle cx="47" cy="55" r="1" fill="white"/>
+      <circle cx="71" cy="55" r="1" fill="white"/>
+      <!-- smile proud -->
+      <path d="M46 67 Q57 74 68 67" stroke="#1a1008" stroke-width="1.8" fill="none"/>
+      <!-- beard -->
+      <path d="M38 66 Q57 80 76 66 Q70 82 57 84 Q44 82 38 66Z" fill="#3a2010" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- moustache -->
+      <path d="M46 64 Q57 68 68 64" stroke="#2a1808" stroke-width="2.5" fill="none"/>
+      <!-- arm raised fist chest -->
+      <path d="M80 110 Q94 96 96 80" stroke="#f5dcb0" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="96" cy="77" rx="8" ry="9" fill="#f5dcb0" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- medal on chest -->
+      <circle cx="55" cy="108" r="8" fill="#d4a017" stroke="#1a1008" stroke-width="1.2"/>
+      <text x="55" y="112" text-anchor="middle" font-size="8" fill="#1a1008">⚓</text>
+      <!-- blush -->
+      <circle cx="36" cy="60" r="6" fill="#ffb0b0" opacity=".4"/>
+      <circle cx="78" cy="60" r="6" fill="#ffb0b0" opacity=".4"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Io sono Cristoforo Colombo, l'uomo che nel 1492 ha aperto nuove rotte commerciali verso occidente.»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Con le mie gesta ho apportato alla Spagna ricchezze, fede e un nuovo mondo da conquistare!»</div>
+  </div>
+</div>
+</div>
+
+<!-- pannello 4-5: Giudice accuse + narratore -->
+<div class="strip s2">
+<div class="panel">
+  <div class="pnum">4</div>
+  <div class="pcap blue">⚖️ Le accuse ufficiali</div>
+  <div class="char-area">
+    <svg width="110" height="130" viewBox="0 0 110 130" xmlns="http://www.w3.org/2000/svg">
+      <!-- robe -->
+      <path d="M18 130 Q22 92 55 86 Q88 92 92 130Z" fill="#2a2860" stroke="#1a1008" stroke-width="2"/>
+      <path d="M36 88 Q55 82 74 88 L70 102 H40Z" fill="#f0f0e8" stroke="#1a1008" stroke-width="1.2"/>
+      <ellipse cx="55" cy="50" rx="22" ry="22" fill="#f5dcb0" stroke="#1a1008" stroke-width="2"/>
+      <path d="M33 46 Q44 22 55 20 Q66 22 77 46" fill="#e0ddd0" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M33 46 Q26 62 30 78" stroke="#e0ddd0" stroke-width="6" stroke-linecap="round"/>
+      <path d="M77 46 Q84 62 80 78" stroke="#e0ddd0" stroke-width="6" stroke-linecap="round"/>
+      <path d="M39 46 Q44 41 49 45" stroke="#3a2010" stroke-width="2.5" fill="none"/>
+      <path d="M61 45 Q66 41 71 46" stroke="#3a2010" stroke-width="2.5" fill="none"/>
+      <ellipse cx="44" cy="51" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="44" cy="52" r="2.5" fill="#1a1008"/>
+      <ellipse cx="66" cy="51" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="66" cy="52" r="2.5" fill="#1a1008"/>
+      <path d="M44 66 Q55 63 66 66" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+      <!-- scroll -->
+      <rect x="18" y="90" width="32" height="26" rx="2" fill="#fdf3d0" stroke="#1a1008" stroke-width="1.2"/>
+      <line x1="22" y1="97" x2="46" y2="97" stroke="#c0392b" stroke-width="1"/>
+      <line x1="22" y1="103" x2="46" y2="103" stroke="#8b5e2a" stroke-width=".8"/>
+      <line x1="22" y1="109" x2="40" y2="109" stroke="#8b5e2a" stroke-width=".8"/>
+      <path d="M46 86 Q42 76 48 72 Q44 80 50 86Z" fill="#1a1008" stroke="#1a1008" stroke-width=".8"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Ammiraglio Colombo, voi siete accusato di crudeltà verso gli indigeni delle terre da voi scoperte…»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«…di abuso del potere affidatovi dai sovrani e di inganno verso la stessa Corona.»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Che abbiate a difendervi.»</div>
+  </div>
+</div>
+
+<div class="panel tilt-l">
+  <div class="pnum">5</div>
+  <div class="pcap red">⚓ Colombo si difende (1ª risposta)</div>
+  <div class="char-area">
+    <svg width="110" height="130" viewBox="0 0 110 130" xmlns="http://www.w3.org/2000/svg">
+      <!-- same colombo but expression more defensive -->
+      <path d="M14 130 Q18 92 55 86 Q92 92 96 130Z" fill="#c0392b" stroke="#1a1008" stroke-width="2"/>
+      <path d="M34 98 Q55 90 76 98 L72 114 H38Z" fill="#d4a040" stroke="#1a1008" stroke-width="1.5"/>
+      <ellipse cx="55" cy="50" rx="22" ry="22" fill="#f5dcb0" stroke="#1a1008" stroke-width="2"/>
+      <path d="M33 46 Q55 22 77 46" fill="#2a1808" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M33 46 Q26 60 28 74" stroke="#2a1808" stroke-width="6" stroke-linecap="round"/>
+      <path d="M77 46 Q84 60 82 74" stroke="#2a1808" stroke-width="6" stroke-linecap="round"/>
+      <!-- defensive brows -->
+      <path d="M38 48 Q44 43 50 47" stroke="#2a1808" stroke-width="2.2" fill="none"/>
+      <path d="M60 47 Q66 43 72 48" stroke="#2a1808" stroke-width="2.2" fill="none"/>
+      <ellipse cx="44" cy="53" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="44" cy="54" r="2.5" fill="#2a1808"/>
+      <ellipse cx="66" cy="53" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="66" cy="54" r="2.5" fill="#2a1808"/>
+      <!-- determined mouth -->
+      <path d="M45 65 Q57 69 69 65" stroke="#1a1008" stroke-width="1.8" fill="none"/>
+      <path d="M38 64 Q57 78 76 64 Q70 80 57 82 Q44 80 38 64Z" fill="#3a2010" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- hand on chest -->
+      <path d="M24 108 Q14 96 18 84" stroke="#f5dcb0" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="18" cy="81" rx="8" ry="9" fill="#f5dcb0" stroke="#1a1008" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Io, Cristoforo Colombo, navigatore di Genova, ho solcato per tutta la vita mari e oceani sconosciuti per amor di scienza e per fede.»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Ho portato alla cristianità nuove terre, nuove anime e ricchezze per la Spagna. Ho obbedito agli ordini dei miei sovrani e servito Dio.»</div>
+  </div>
+</div>
+</div>
+
+<!-- pannello 6: Regina Isabella -->
+<div class="strip s1">
+<div class="panel">
+  <div class="pnum">6</div>
+  <div class="pcap purple">👑 Regina Isabella di Castiglia</div>
+  <div class="char-area">
+    <!-- ISABELLA hand-drawn -->
+    <svg width="130" height="160" viewBox="0 0 130 160" xmlns="http://www.w3.org/2000/svg">
+      <!-- throne back -->
+      <rect x="40" y="20" width="50" height="120" rx="6" fill="#8b5e2a" stroke="#1a1008" stroke-width="1.8"/>
+      <path d="M40 20 Q65 10 90 20" fill="#d4a017" stroke="#1a1008" stroke-width="1.2"/>
+      <!-- armrests -->
+      <rect x="28" y="90" width="20" height="8" rx="4" fill="#7a4f1e" stroke="#1a1008" stroke-width="1"/>
+      <rect x="82" y="90" width="20" height="8" rx="4" fill="#7a4f1e" stroke="#1a1008" stroke-width="1"/>
+      <!-- dress flowing purple -->
+      <path d="M26 160 Q30 112 65 106 Q100 112 104 160Z" fill="#6b1a6b" stroke="#1a1008" stroke-width="2"/>
+      <!-- bodice detail -->
+      <path d="M42 114 Q65 106 88 114 L84 130 H46Z" fill="#8b2a8b" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- sleeve left -->
+      <path d="M26 130 Q16 118 18 104" stroke="#6b1a6b" stroke-width="14" stroke-linecap="round"/>
+      <path d="M18 102 Q12 96 14 88" stroke="#f5dcb0" stroke-width="9" stroke-linecap="round"/>
+      <!-- sleeve right -->
+      <path d="M104 130 Q114 118 112 104" stroke="#6b1a6b" stroke-width="14" stroke-linecap="round"/>
+      <path d="M112 102 Q118 96 116 88" stroke="#f5dcb0" stroke-width="9" stroke-linecap="round"/>
+      <!-- head -->
+      <ellipse cx="65" cy="56" rx="23" ry="24" fill="#f5dcb0" stroke="#1a1008" stroke-width="2.2"/>
+      <!-- crown -->
+      <path d="M42 48 L46 30 L54 44 L65 28 L76 44 L84 30 L88 48Z" fill="#d4a017" stroke="#1a1008" stroke-width="1.5"/>
+      <rect x="42" y="46" width="46" height="10" rx="3" fill="#b8860b" stroke="#1a1008" stroke-width="1.2"/>
+      <!-- jewels on crown -->
+      <circle cx="55" cy="51" r="3" fill="#c0392b"/>
+      <circle cx="65" cy="51" r="3" fill="#2980b9"/>
+      <circle cx="75" cy="51" r="3" fill="#27ae60"/>
+      <!-- veil lace -->
+      <path d="M42 62 Q36 78 38 96" stroke="#e8d5a3" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+      <path d="M88 62 Q94 78 92 96" stroke="#e8d5a3" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+      <!-- eyes, slightly stern -->
+      <ellipse cx="57" cy="58" rx="4.5" ry="5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="58" cy="59" r="2.5" fill="#2a1808"/>
+      <ellipse cx="73" cy="58" rx="4.5" ry="5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="74" cy="59" r="2.5" fill="#2a1808"/>
+      <!-- elegant eyebrows -->
+      <path d="M53 52 Q57 48 61 52" stroke="#3a2010" stroke-width="1.8" fill="none"/>
+      <path d="M69 52 Q73 48 77 52" stroke="#3a2010" stroke-width="1.8" fill="none"/>
+      <!-- mouth thin elegant -->
+      <path d="M57 70 Q65 74 73 70" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+      <!-- pearl necklace -->
+      <path d="M48 86 Q65 92 82 86" stroke="none" fill="none"/>
+      <circle cx="52" cy="88" r="3" fill="#f0f0e8" stroke="#1a1008" stroke-width=".8"/>
+      <circle cx="59" cy="90" r="3" fill="#f0f0e8" stroke="#1a1008" stroke-width=".8"/>
+      <circle cx="65" cy="91" r="3" fill="#f0f0e8" stroke="#1a1008" stroke-width=".8"/>
+      <circle cx="71" cy="90" r="3" fill="#f0f0e8" stroke="#1a1008" stroke-width=".8"/>
+      <circle cx="78" cy="88" r="3" fill="#f0f0e8" stroke="#1a1008" stroke-width=".8"/>
+      <!-- blush -->
+      <circle cx="44" cy="64" r="7" fill="#ffb0b0" opacity=".4"/>
+      <circle cx="86" cy="64" r="7" fill="#ffb0b0" opacity=".4"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">👑 REGINA ISABELLA</span>«Sappiate, Ammiraglio, che la Corona non dimentica il vostro coraggio.»</div>
+    <div class="bub l"><span class="who">👑 REGINA ISABELLA</span>«Ma giungono notizie oscure dalle Indie: popoli sottomessi, città distrutte, uomini e donne incatenati, torturati e uccisi.»</div>
+    <div class="bub l"><span class="who">👑 REGINA ISABELLA</span>«La gloria delle ricchezze non giustifica il sangue versato.»</div>
+    <div class="bub narr">L'aula si riempie di tensione. Il cronista annota.</div>
+    <div class="bub narr">«L'aula si riempie di voci. Chi parlerà a favore? Chi contro? Il destino di Colombo è nelle mani della storia.»</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCENA II – LE ACCUSE
+══════════════════════════════════ -->
+<div class="scene-header"><span class="scene-icon">⛵</span> Scena II – Le Accuse dei Testimoni</div>
+<div class="doodle-row">⛓️ 🩸 ⛏️ 💧 ⛓️</div>
+
+<!-- marinaio -->
+<div class="strip s12">
+<div class="panel">
+  <div class="pnum">7</div>
+  <div class="pcap brown">⚓ Il Giudice chiama il marinaio</div>
+  <div class="char-area">
+    <svg width="110" height="120" viewBox="0 0 110 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 120 Q22 86 55 80 Q88 86 92 120Z" fill="#2a2860" stroke="#1a1008" stroke-width="2"/>
+      <path d="M34 82 Q55 76 76 82 L72 96 H38Z" fill="#f0f0e8" stroke="#1a1008" stroke-width="1.2"/>
+      <ellipse cx="55" cy="48" rx="22" ry="22" fill="#f5dcb0" stroke="#1a1008" stroke-width="2"/>
+      <path d="M33 44 Q44 20 55 18 Q66 20 77 44" fill="#e0ddd0" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M33 44 Q26 60 30 76" stroke="#e0ddd0" stroke-width="6" stroke-linecap="round"/>
+      <path d="M77 44 Q84 60 80 76" stroke="#e0ddd0" stroke-width="6" stroke-linecap="round"/>
+      <path d="M39 44 Q44 39 49 43" stroke="#3a2010" stroke-width="2.2" fill="none"/>
+      <path d="M61 43 Q66 39 71 44" stroke="#3a2010" stroke-width="2.2" fill="none"/>
+      <ellipse cx="44" cy="49" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="44" cy="50" r="2.5" fill="#1a1008"/>
+      <ellipse cx="66" cy="49" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="66" cy="50" r="2.5" fill="#1a1008"/>
+      <path d="M44 62 Q55 59 66 62" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Si presenti il primo testimone: uno dei marinai che prese parte alla spedizione del 1492.»</div>
+  </div>
+</div>
+
+<div class="panel tilt-r">
+  <div class="pnum">8</div>
+  <div class="pcap orange">🌊 Il Marinaio Paolo – Testimonianza</div>
+  <div class="char-area">
+    <!-- SAILOR Paolo, nervous face, hand-drawn -->
+    <svg width="130" height="160" viewBox="0 0 130 160" xmlns="http://www.w3.org/2000/svg">
+      <!-- body sailor tunic striped -->
+      <path d="M18 160 Q22 112 65 104 Q108 112 112 160Z" fill="#3a5a8a" stroke="#1a1008" stroke-width="2"/>
+      <!-- stripes on chest -->
+      <path d="M34 118 Q65 108 96 118" stroke="#5a7aaa" stroke-width="3" fill="none"/>
+      <path d="M32 126 Q65 116 98 126" stroke="#5a7aaa" stroke-width="3" fill="none"/>
+      <!-- rope belt -->
+      <rect x="28" y="132" width="74" height="8" rx="4" fill="#8b6914" stroke="#1a1008" stroke-width="1.2"/>
+      <!-- head tanned, nervous -->
+      <ellipse cx="65" cy="54" rx="24" ry="24" fill="#d4956a" stroke="#1a1008" stroke-width="2.2"/>
+      <!-- red bandana hand-drawn -->
+      <path d="M41 46 Q65 34 89 46 L87 54 Q65 44 43 54Z" fill="#c0392b" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- nervous eyebrows -->
+      <path d="M46 50 Q51 44 56 49" stroke="#3a1a08" stroke-width="2.5" fill="none"/>
+      <path d="M74 49 Q79 44 84 50" stroke="#3a1a08" stroke-width="2.5" fill="none"/>
+      <!-- worried eyes wide -->
+      <ellipse cx="51" cy="56" rx="5" ry="5.5" fill="white" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="52" cy="57" r="3" fill="#2a1808"/>
+      <circle cx="53" cy="56" r="1" fill="white"/>
+      <ellipse cx="79" cy="56" rx="5" ry="5.5" fill="white" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="80" cy="57" r="3" fill="#2a1808"/>
+      <circle cx="81" cy="56" r="1" fill="white"/>
+      <!-- sweat drop -->
+      <ellipse cx="89" cy="48" rx="3" ry="5" fill="#8ab0d4" opacity=".8"/>
+      <!-- stubble dots -->
+      <circle cx="50" cy="70" r="1.2" fill="#5a3a1a"/>
+      <circle cx="57" cy="73" r="1.2" fill="#5a3a1a"/>
+      <circle cx="65" cy="74" r="1.2" fill="#5a3a1a"/>
+      <circle cx="73" cy="73" r="1.2" fill="#5a3a1a"/>
+      <circle cx="80" cy="70" r="1.2" fill="#5a3a1a"/>
+      <!-- open mouth nervous -->
+      <path d="M53 67 Q65 73 77 67 Q71 76 65 77 Q59 76 53 67Z" fill="#c06050" stroke="#1a1008" stroke-width="1.2"/>
+      <!-- hand on witness box -->
+      <path d="M18 140 Q8 126 12 112" stroke="#d4956a" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="12" cy="109" rx="8" ry="9" fill="#d4956a" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- blush flustered -->
+      <circle cx="40" cy="62" r="8" fill="#ff9090" opacity=".45"/>
+      <circle cx="90" cy="62" r="8" fill="#ff9090" opacity=".45"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">🌊 MARINAIO PAOLO</span>«Il mio nome è Paolo. Ero sulla Santa Maria. Partimmo da Palos il 3 agosto 1492, pieni di speranza e di orgoglio.»</div>
+    <div class="bub l"><span class="who">🌊 MARINAIO PAOLO</span>«Ben presto, trovandoci in mare aperto senza avvistare mai terraferma, la paura iniziò ad assalirci.»</div>
+    <div class="bub l"><span class="who">🌊 MARINAIO PAOLO</span>«Dopo settimane di tempeste, nel 12 ottobre 1492 avvistammo finalmente la terraferma.»</div>
+    <div class="bub l"><span class="who">🌊 MARINAIO PAOLO</span>«Ci trovammo di fronte un popolo mai visto: gente nuda, con armi rudimentali e una lingua a noi sconosciuta. Eppure si dimostrarono gentili e accoglienti, offrendoci cibo e oro.»</div>
+    <div class="bub l"><span class="who">🌊 MARINAIO PAOLO</span>«Le cose però presto cambiarono. Ci dissero di prendere oro, di usare la forza se necessario. Chi poteva disobbedire?»</div>
+    <div class="bub l"><span class="who">🌊 MARINAIO PAOLO</span>«Il Capitano chiese tributi, punì chi non li portava. Le mani di chi rifiutava venivano mozzate. Io stesso vidi piangere uomini, donne e bambini.»</div>
+    <div class="bub l"><span class="who">🌊 MARINAIO PAOLO</span>«La Spagna voleva ricchezze, e le coste si tinsero di sangue.»</div>
+  </div>
+</div>
+</div>
+
+<!-- giudice annota + taino -->
+<div class="strip s2">
+<div class="panel tilt-l">
+  <div class="pnum">9</div>
+  <div class="pcap blue">⚖️ Il Giudice annota</div>
+  <div class="char-area">
+    <svg width="100" height="120" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 120 Q20 86 50 80 Q80 86 84 120Z" fill="#2a2860" stroke="#1a1008" stroke-width="2"/>
+      <path d="M30 82 Q50 76 70 82 L66 96 H34Z" fill="#f0f0e8" stroke="#1a1008" stroke-width="1.2"/>
+      <ellipse cx="50" cy="46" rx="20" ry="21" fill="#f5dcb0" stroke="#1a1008" stroke-width="2"/>
+      <path d="M30 42 Q40 20 50 18 Q60 20 70 42" fill="#e0ddd0" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M30 42 Q24 58 28 72" stroke="#e0ddd0" stroke-width="5" stroke-linecap="round"/>
+      <path d="M70 42 Q76 58 72 72" stroke="#e0ddd0" stroke-width="5" stroke-linecap="round"/>
+      <path d="M36 42 Q40 37 44 41" stroke="#3a2010" stroke-width="2" fill="none"/>
+      <path d="M56 41 Q60 37 64 42" stroke="#3a2010" stroke-width="2" fill="none"/>
+      <ellipse cx="40" cy="47" rx="3.5" ry="4" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="40" cy="48" r="2" fill="#1a1008"/>
+      <ellipse cx="60" cy="47" rx="3.5" ry="4" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="60" cy="48" r="2" fill="#1a1008"/>
+      <path d="M40 59 Q50 56 60 59" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+      <!-- scroll + quill -->
+      <rect x="56" y="82" width="30" height="28" rx="2" fill="#fdf3d0" stroke="#1a1008" stroke-width="1.2"/>
+      <line x1="60" y1="90" x2="82" y2="90" stroke="#c0392b" stroke-width="1"/>
+      <line x1="60" y1="96" x2="82" y2="96" stroke="#8b5e2a" stroke-width=".8"/>
+      <line x1="60" y1="102" x2="76" y2="102" stroke="#8b5e2a" stroke-width=".8"/>
+      <path d="M52 80 Q48 70 54 66 Q50 74 56 80Z" fill="#1a1008" stroke="#1a1008" stroke-width=".8"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Queste sono senz'altro parole gravi, tanto più se dette da un marinaio come voi.»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Si parla di schiavitù, violenze, sfruttamento. Accuse che vanno contro il volere di Dio.»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Si chiami ora il secondo testimone: un indigeno delle isole Antille.»</div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="pnum">10</div>
+  <div class="pcap green">🌿 Indigeno Taino – Garocuya</div>
+  <div class="char-area">
+    <!-- TAINO Garocuya, hand-drawn expressive -->
+    <svg width="130" height="160" viewBox="0 0 130 160" xmlns="http://www.w3.org/2000/svg">
+      <!-- body wrap cloth orange-brown -->
+      <path d="M18 160 Q22 112 65 104 Q108 112 112 160Z" fill="#c87830" stroke="#1a1008" stroke-width="2"/>
+      <!-- decorative patterns on wrap -->
+      <path d="M26 130 Q40 122 54 130" stroke="#8b1a1a" stroke-width="2" fill="none"/>
+      <path d="M76 128 Q90 120 104 128" stroke="#8b1a1a" stroke-width="2" fill="none"/>
+      <!-- geometric tattoo on arm -->
+      <path d="M22 140 Q18 130 22 118" stroke="#5a2a08" stroke-width="9" stroke-linecap="round"/>
+      <path d="M20 134 Q14 130 20 126" stroke="#3a1a08" stroke-width="1.5" fill="none"/>
+      <!-- head round, darker skin -->
+      <ellipse cx="65" cy="52" rx="24" ry="25" fill="#c87830" stroke="#1a1008" stroke-width="2.2"/>
+      <!-- black long straight hair -->
+      <path d="M41 48 Q65 26 89 48" fill="#1a0a00" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M41 48 Q33 66 35 88" stroke="#1a0a00" stroke-width="7" stroke-linecap="round"/>
+      <path d="M89 48 Q97 66 95 88" stroke="#1a0a00" stroke-width="7" stroke-linecap="round"/>
+      <!-- feather in hair red -->
+      <path d="M85 42 Q98 20 92 34 Q104 16 97 32 Q102 20 100 36Z" fill="#e84020" stroke="#1a1008" stroke-width="1"/>
+      <path d="M87 40 Q92 36 94 32" stroke="#f8c050" stroke-width="1" fill="none"/>
+      <!-- sad eyes with tears -->
+      <ellipse cx="56" cy="55" rx="5" ry="5.5" fill="white" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="57" cy="56" r="3" fill="#2a1808"/>
+      <circle cx="58" cy="55" r="1" fill="white"/>
+      <ellipse cx="74" cy="55" rx="5" ry="5.5" fill="white" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="75" cy="56" r="3" fill="#2a1808"/>
+      <circle cx="76" cy="55" r="1" fill="white"/>
+      <!-- tears -->
+      <path d="M53 62 Q50 68 52 74" stroke="#6ab0d4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <ellipse cx="52" cy="75" rx="2" ry="3" fill="#6ab0d4" opacity=".8"/>
+      <!-- sorrowful brows down -->
+      <path d="M50 48 Q56 44 62 48" stroke="#3a1a08" stroke-width="2.2" fill="none"/>
+      <path d="M68 48 Q74 44 80 48" stroke="#3a1a08" stroke-width="2.2" fill="none"/>
+      <!-- open mouth speaking -->
+      <path d="M56 70 Q65 76 74 70 Q70 80 65 82 Q60 80 56 70Z" fill="#8b3010" stroke="#1a1008" stroke-width="1.2"/>
+      <!-- hand raised pleading -->
+      <path d="M108 128 Q118 112 118 96" stroke="#c87830" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="118" cy="93" rx="9" ry="10" fill="#c87830" stroke="#1a1008" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">🌿 GAROCUYA (Taino)</span>«Il mio nome è Garocuya. La nostra vita, prima dell'arrivo delle vostre navi, era costruita sulla pace tra i popoli.»</div>
+    <div class="bub l"><span class="who">🌿 GAROCUYA</span>«Le nostre giornate erano scandite dal lavoro: cacciavamo, coltivavamo il terreno e pregavamo i nostri dèi.»</div>
+    <div class="bub l"><span class="who">🌿 GAROCUYA</span>«Un giorno arrivarono gli uomini bianchi con le grandi navi. Con croci e spade. Con le stesse armi presero le nostre terre e imposero le loro leggi.»</div>
+    <div class="bub l"><span class="who">🌿 GAROCUYA</span>«Molti dei miei fratelli furono mandati a morire nelle miniere d'oro. Molte delle nostre donne sono state violentate e trattate come schiave.»</div>
+    <div class="bub l"><span class="who">🌿 GAROCUYA</span>«Dal loro arrivo il nostro popolo si sta spegnendo come fuoco nella pioggia.»</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCENA III – LA DIFESA
+══════════════════════════════════ -->
+<div class="scene-header"><span class="scene-icon">✝️</span> Scena III – La Difesa di Colombo</div>
+<div class="doodle-row">🕊️ ✝️ ⚔️ ✝️ 🕊️</div>
+
+<!-- colombo si difende vs frate -->
+<div class="strip s2">
+<div class="panel tilt-l">
+  <div class="pnum">11</div>
+  <div class="pcap red">⚓ Colombo si difende – 2ª risposta</div>
+  <div class="char-area">
+    <svg width="115" height="150" viewBox="0 0 115 150" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 150 Q18 104 57 96 Q96 104 100 150Z" fill="#c0392b" stroke="#1a1008" stroke-width="2"/>
+      <path d="M34 108 Q57 100 80 108 L76 122 H38Z" fill="#d4a040" stroke="#1a1008" stroke-width="1.5"/>
+      <rect x="30" y="122" width="54" height="7" rx="3" fill="#6a3a10" stroke="#1a1008" stroke-width="1.2"/>
+      <ellipse cx="57" cy="52" rx="23" ry="23" fill="#f5dcb0" stroke="#1a1008" stroke-width="2.2"/>
+      <path d="M34 48 Q57 24 80 48" fill="#2a1808" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M34 48 Q27 62 30 76" stroke="#2a1808" stroke-width="7" stroke-linecap="round"/>
+      <path d="M80 48 Q87 62 84 76" stroke="#2a1808" stroke-width="7" stroke-linecap="round"/>
+      <!-- upset brows -->
+      <path d="M39 50 Q45 44 51 49" stroke="#2a1808" stroke-width="2.5" fill="none"/>
+      <path d="M63 49 Q69 44 75 50" stroke="#2a1808" stroke-width="2.5" fill="none"/>
+      <ellipse cx="45" cy="56" rx="4.5" ry="5" fill="white" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="46" cy="57" r="2.8" fill="#2a1808"/>
+      <ellipse cx="69" cy="56" rx="4.5" ry="5" fill="white" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="70" cy="57" r="2.8" fill="#2a1808"/>
+      <!-- firm mouth -->
+      <path d="M47 67 Q57 71 67 67" stroke="#1a1008" stroke-width="2" fill="none"/>
+      <path d="M38 66 Q57 80 76 66 Q70 82 57 84 Q44 82 38 66Z" fill="#3a2010" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- arms open defensive -->
+      <path d="M100 118 Q114 102 116 86" stroke="#f5dcb0" stroke-width="9" stroke-linecap="round"/>
+      <path d="M14 118 Q0 102 -2 86" stroke="#f5dcb0" stroke-width="9" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Mi si accusa oggi di crudeltà, ma io non sono un mostro!»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Ho agito per fede e per gloria della Spagna e della corona. Ho compiuto l'impresa che nessuno aveva osato fare.»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Ho voluto portare la vera fede a genti prive della conoscenza di Dio. Ho voluto portar loro il dono della civiltà.»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Se vi furono eccessi, non furono certo miei, ma dei coloni avidi di ricchezze.»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Non si giudichi con gli occhi di oggi ciò che allora era missione e fede!»</div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="pnum">12</div>
+  <div class="pcap brown">✝️ Frate Bartolomeo de las Casas</div>
+  <div class="char-area">
+    <!-- FRATE hand-drawn brown habit, pointing -->
+    <svg width="115" height="155" viewBox="0 0 115 155" xmlns="http://www.w3.org/2000/svg">
+      <!-- habit brown hood and robe -->
+      <path d="M14 155 Q18 108 57 100 Q96 108 100 155Z" fill="#6b4a1a" stroke="#1a1008" stroke-width="2"/>
+      <!-- hood over head -->
+      <path d="M34 88 Q57 74 80 88" fill="#5a3a10" stroke="#1a1008" stroke-width="1.8"/>
+      <!-- rope cord belt -->
+      <rect x="28" y="128" width="58" height="7" rx="3" fill="#8b6914" stroke="#1a1008" stroke-width="1.2"/>
+      <!-- cross dangling -->
+      <rect x="52" y="132" width="5" height="18" rx="1" fill="#5a3a10" stroke="#1a1008" stroke-width="1"/>
+      <rect x="47" y="138" width="15" height="4" rx="1" fill="#5a3a10" stroke="#1a1008" stroke-width="1"/>
+      <!-- head round, older face -->
+      <ellipse cx="57" cy="54" rx="22" ry="23" fill="#d4b07a" stroke="#1a1008" stroke-width="2.2"/>
+      <!-- bald on top, fringe -->
+      <path d="M35 50 Q57 38 79 50" fill="#6b4a1a" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M35 50 Q34 44 36 38 Q47 42 57 40 Q67 42 78 38 Q80 44 79 50" fill="#d4b07a" stroke="none"/>
+      <!-- wrinkles on forehead -->
+      <path d="M44 50 Q50 47 56 50" stroke="#a07840" stroke-width="1" fill="none"/>
+      <path d="M58 50 Q64 47 70 50" stroke="#a07840" stroke-width="1" fill="none"/>
+      <!-- stern angry brows -->
+      <path d="M40 52 Q46 46 52 51" stroke="#3a1a08" stroke-width="2.8" fill="none"/>
+      <path d="M62 51 Q68 46 74 52" stroke="#3a1a08" stroke-width="2.8" fill="none"/>
+      <!-- piercing eyes -->
+      <ellipse cx="46" cy="57" rx="4.5" ry="5" fill="white" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="47" cy="58" r="2.8" fill="#1a1008"/>
+      <ellipse cx="68" cy="57" rx="4.5" ry="5" fill="white" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="69" cy="58" r="2.8" fill="#1a1008"/>
+      <!-- firm tight mouth -->
+      <path d="M46 70 Q57 67 68 70" stroke="#1a1008" stroke-width="2" fill="none"/>
+      <!-- pointing finger accusatory -->
+      <path d="M14 118 Q4 104 6 88" stroke="#d4b07a" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="6" cy="85" rx="8" ry="9" fill="#d4b07a" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M2 85 L-4 78" stroke="#d4b07a" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">✝️ FRA' BARTOLOMEO</span>«Un dono? Semmai uno sterminio!»</div>
+    <div class="bub l"><span class="who">✝️ FRA' BARTOLOMEO</span>«Ammiraglio, io vi credo uomo di fede. Ma ciò a cui ho assistito non ha alcun ideale di fede.»</div>
+    <div class="bub l"><span class="who">✝️ FRA' BARTOLOMEO</span>«Ho visto con i miei occhi le persone ferite, i villaggi incendiati, gli schiavi incatenati, le donne violentate e i bambini uccisi.»</div>
+    <div class="bub l"><span class="who">✝️ FRA' BARTOLOMEO</span>«Non si converte un popolo con la spada. La fede si offre, non si impone.»</div>
+  </div>
+</div>
+</div>
+
+<!-- Regina + Mercante -->
+<div class="strip s2">
+<div class="panel tilt-r">
+  <div class="pnum">13</div>
+  <div class="pcap purple">👑 La Regina difende Colombo</div>
+  <div class="char-area">
+    <svg width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 140 Q20 100 55 92 Q90 100 94 140Z" fill="#6b1a6b" stroke="#1a1008" stroke-width="2"/>
+      <path d="M32 100 Q55 92 78 100 L74 116 H36Z" fill="#8b2a8b" stroke="#1a1008" stroke-width="1.5"/>
+      <ellipse cx="55" cy="52" rx="22" ry="23" fill="#f5dcb0" stroke="#1a1008" stroke-width="2"/>
+      <path d="M33 44 L37 28 L45 40 L55 24 L65 40 L73 28 L77 44Z" fill="#d4a017" stroke="#1a1008" stroke-width="1.5"/>
+      <rect x="33" y="42" width="44" height="9" rx="3" fill="#b8860b" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="46" cy="47" r="3" fill="#c0392b"/>
+      <circle cx="55" cy="47" r="3" fill="#2980b9"/>
+      <circle cx="64" cy="47" r="3" fill="#27ae60"/>
+      <path d="M33 58 Q27 72 29 88" stroke="#e8d5a3" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+      <path d="M77 58 Q83 72 81 88" stroke="#e8d5a3" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+      <path d="M42 50 Q46 45 50 49" stroke="#3a2010" stroke-width="1.8" fill="none"/>
+      <path d="M60 49 Q64 45 68 50" stroke="#3a2010" stroke-width="1.8" fill="none"/>
+      <ellipse cx="46" cy="55" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="47" cy="56" r="2.5" fill="#2a1808"/>
+      <ellipse cx="64" cy="55" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="65" cy="56" r="2.5" fill="#2a1808"/>
+      <path d="M47 67 Q55 71 63 67" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+      <!-- pearl necklace -->
+      <circle cx="44" cy="76" r="3" fill="#f0f0e8" stroke="#1a1008" stroke-width=".8"/>
+      <circle cx="51" cy="78" r="3" fill="#f0f0e8" stroke="#1a1008" stroke-width=".8"/>
+      <circle cx="59" cy="78" r="3" fill="#f0f0e8" stroke="#1a1008" stroke-width=".8"/>
+      <circle cx="66" cy="76" r="3" fill="#f0f0e8" stroke="#1a1008" stroke-width=".8"/>
+      <circle cx="35" cy="66" r="7" fill="#ffb0b0" opacity=".4"/>
+      <circle cx="75" cy="66" r="7" fill="#ffb0b0" opacity=".4"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">👑 REGINA ISABELLA</span>«È vero. L'Ammiraglio Colombo ha servito la corona. Senza di lui, la Spagna non sarebbe oggi la regina dei mari.»</div>
+    <div class="bub l"><span class="who">👑 REGINA ISABELLA</span>«La nostra intenzione era diffondere la fede cristiana, portare civiltà. Non possiamo dimenticare i meriti della scoperta.»</div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="pnum">14</div>
+  <div class="pcap orange">💰 Il Mercante Europeo</div>
+  <div class="char-area">
+    <!-- MERCHANT fat rich figure, hand-drawn -->
+    <svg width="110" height="145" viewBox="0 0 110 145" xmlns="http://www.w3.org/2000/svg">
+      <!-- body wide and round, fur coat -->
+      <path d="M10 145 Q14 98 55 90 Q96 98 100 145Z" fill="#5a4a1a" stroke="#1a1008" stroke-width="2"/>
+      <!-- fur collar -->
+      <path d="M20 100 Q55 88 90 100" stroke="#9a9080" stroke-width="10" stroke-linecap="round"/>
+      <!-- buttons down -->
+      <circle cx="55" cy="112" r="4" fill="#8b6914" stroke="#1a1008" stroke-width="1"/>
+      <circle cx="55" cy="124" r="4" fill="#8b6914" stroke="#1a1008" stroke-width="1"/>
+      <circle cx="55" cy="136" r="4" fill="#8b6914" stroke="#1a1008" stroke-width="1"/>
+      <!-- head chubby round -->
+      <ellipse cx="55" cy="52" rx="26" ry="25" fill="#e8c880" stroke="#1a1008" stroke-width="2.2"/>
+      <!-- merchant hat -->
+      <ellipse cx="55" cy="30" rx="30" ry="10" fill="#3a2810" stroke="#1a1008" stroke-width="1.5"/>
+      <rect x="34" y="18" width="42" height="16" rx="2" fill="#3a2810" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M34 30 Q55 26 76 30" stroke="#8b6914" stroke-width="1.5" fill="none"/>
+      <!-- chubby happy face -->
+      <path d="M38 50 Q43 45 48 50" stroke="#2a1808" stroke-width="2" fill="none"/>
+      <path d="M62 50 Q67 45 72 50" stroke="#2a1808" stroke-width="2" fill="none"/>
+      <ellipse cx="43" cy="56" rx="4.5" ry="5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="44" cy="57" r="2.8" fill="#2a1808"/>
+      <ellipse cx="67" cy="56" rx="4.5" ry="5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="68" cy="57" r="2.8" fill="#2a1808"/>
+      <!-- big smile -->
+      <path d="M42 70 Q55 80 68 70" stroke="#1a1008" stroke-width="2.5" fill="none"/>
+      <!-- chubby cheeks -->
+      <circle cx="34" cy="62" r="10" fill="#ffb070" opacity=".5"/>
+      <circle cx="76" cy="62" r="10" fill="#ffb070" opacity=".5"/>
+      <!-- hand with coins -->
+      <path d="M96 118 Q108 102 106 86" stroke="#e8c880" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="106" cy="83" rx="9" ry="10" fill="#e8c880" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- gold coins -->
+      <circle cx="100" cy="80" r="5" fill="#d4a017" stroke="#1a1008"/>
+      <circle cx="108" cy="78" r="5" fill="#d4a017" stroke="#1a1008"/>
+      <circle cx="104" cy="72" r="5" fill="#b8860b" stroke="#1a1008"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub r"><span class="who">💰 MERCANTE</span>«Grazie a quelle navi il mondo è completamente cambiato!»</div>
+    <div class="bub r"><span class="who">💰 MERCANTE</span>«Oro, spezie, nuove merci mai viste prima… Mercati infiniti si sono aperti.»</div>
+    <div class="bub r"><span class="who">💰 MERCANTE</span>«È stato senz'altro un dono al progresso dell'Europa!»</div>
+  </div>
+</div>
+</div>
+
+<!-- Colombo risponde scosso + Frate 2 -->
+<div class="strip s2">
+<div class="panel tilt-l">
+  <div class="pnum">15</div>
+  <div class="pcap red">⚓ Colombo – risposta finale alla Scena III</div>
+  <div class="char-area">
+    <svg width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 140 Q18 98 55 90 Q92 98 96 140Z" fill="#922b21" stroke="#1a1008" stroke-width="2"/>
+      <path d="M32 102 Q55 94 78 102 L74 118 H36Z" fill="#d4a040" stroke="#1a1008" stroke-width="1.5"/>
+      <ellipse cx="55" cy="50" rx="22" ry="23" fill="#f5dcb0" stroke="#1a1008" stroke-width="2"/>
+      <path d="M33 46 Q55 22 77 46" fill="#2a1808" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M33 46 Q26 60 29 74" stroke="#2a1808" stroke-width="6" stroke-linecap="round"/>
+      <path d="M77 46 Q84 60 81 74" stroke="#2a1808" stroke-width="6" stroke-linecap="round"/>
+      <!-- tired sad brows -->
+      <path d="M38 50 Q44 46 50 49" stroke="#2a1808" stroke-width="2" fill="none"/>
+      <path d="M60 49 Q66 46 72 50" stroke="#2a1808" stroke-width="2" fill="none"/>
+      <ellipse cx="44" cy="55" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="44" cy="56" r="2.5" fill="#2a1808"/>
+      <ellipse cx="66" cy="55" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="66" cy="56" r="2.5" fill="#2a1808"/>
+      <!-- sad mouth -->
+      <path d="M46 68 Q55 64 64 68" stroke="#1a1008" stroke-width="1.8" fill="none"/>
+      <path d="M36 68 Q55 80 74 68 Q68 82 55 84 Q42 82 36 68Z" fill="#3a2010" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- hand on forehead tired -->
+      <path d="M24 106 Q14 92 16 78" stroke="#f5dcb0" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="17" cy="75" rx="8" ry="9" fill="#f5dcb0" stroke="#1a1008" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Forse ho peccato di cieca obbedienza, ma il mondo che ho trovato è diverso da ogni possibile sogno.»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Ho scoperto terre immense, ma anche la debolezza degli uomini.»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Siate giusti nel giudizio, ma non cancellate dalla memoria futura la mia impresa.»</div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="pnum">16</div>
+  <div class="pcap brown">✝️ Frate Bartolomeo – 2ª accusa</div>
+  <div class="char-area">
+    <svg width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 140 Q18 96 55 88 Q92 96 96 140Z" fill="#6b4a1a" stroke="#1a1008" stroke-width="2"/>
+      <path d="M33 80 Q55 72 77 80" fill="#5a3a10" stroke="#1a1008" stroke-width="1.8"/>
+      <rect x="28" y="120" width="54" height="7" rx="3" fill="#8b6914" stroke="#1a1008" stroke-width="1.2"/>
+      <rect x="50" y="126" width="5" height="14" rx="1" fill="#5a3a10" stroke="#1a1008" stroke-width="1"/>
+      <rect x="45" y="131" width="15" height="4" rx="1" fill="#5a3a10" stroke="#1a1008" stroke-width="1"/>
+      <ellipse cx="55" cy="50" rx="22" ry="22" fill="#d4b07a" stroke="#1a1008" stroke-width="2"/>
+      <path d="M33 46 Q55 34 77 46" fill="#6b4a1a" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M38 48 Q44 42 50 47" stroke="#3a1a08" stroke-width="2.8" fill="none"/>
+      <path d="M60 47 Q66 42 72 48" stroke="#3a1a08" stroke-width="2.8" fill="none"/>
+      <ellipse cx="44" cy="53" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="45" cy="54" r="2.5" fill="#1a1008"/>
+      <ellipse cx="66" cy="53" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="67" cy="54" r="2.5" fill="#1a1008"/>
+      <!-- open mouth passionate -->
+      <path d="M47 66 Q55 72 63 66 Q59 74 55 76 Q51 74 47 66Z" fill="#8b3010" stroke="#1a1008" stroke-width="1.2"/>
+      <!-- finger pointing up -->
+      <path d="M96 106 Q106 92 104 76" stroke="#d4b07a" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="103" cy="73" rx="8" ry="9" fill="#d4b07a" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M100 68 Q103 60 106 64" stroke="#d4b07a" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">✝️ FRA' BARTOLOMEO</span>«È da ammettere che i posteri ricorderanno ciò che è accaduto come uno dei più grandi eventi storici.»</div>
+    <div class="bub l"><span class="who">✝️ FRA' BARTOLOMEO</span>«Ma vengano a conoscenza delle atrocità commesse, delle usurpazioni, delle violenze: una popolazione semplice e umile che ha solo tentato di difendere la propria terra.»</div>
+    <div class="bub l"><span class="who">✝️ FRA' BARTOLOMEO</span>«Ho assistito con dolore a tanta sofferenza. Come uomo di fede mi faccio portavoce di queste ingiustizie. Scriverò tutto ciò che i miei occhi hanno dovuto vedere.»</div>
+    <div class="bub l"><span class="who">✝️ FRA' BARTOLOMEO</span>«I posteri giudicheranno: un genocidio.»</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCENA IV – CONFRONTO ACCESO
+══════════════════════════════════ -->
+<div class="scene-header"><span class="scene-icon">🔥</span> Scena IV – Le Voci del Potere, Confronto Acceso</div>
+<div class="doodle-row">💰 ⚔️ 🌿 ⚔️ 💰</div>
+
+<div class="strip s2">
+<div class="panel">
+  <div class="pnum">17</div>
+  <div class="pcap orange">💰 Mercante di Siviglia</div>
+  <div class="char-area">
+    <svg width="110" height="135" viewBox="0 0 110 135" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 135 Q14 92 55 84 Q96 92 100 135Z" fill="#5a4a1a" stroke="#1a1008" stroke-width="2"/>
+      <path d="M20 95 Q55 83 90 95" stroke="#9a9080" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="55" cy="108" r="4" fill="#8b6914" stroke="#1a1008" stroke-width="1"/>
+      <circle cx="55" cy="120" r="4" fill="#8b6914" stroke="#1a1008" stroke-width="1"/>
+      <ellipse cx="55" cy="48" rx="25" ry="24" fill="#e8c880" stroke="#1a1008" stroke-width="2"/>
+      <ellipse cx="55" cy="26" rx="29" ry="8" fill="#3a2810" stroke="#1a1008" stroke-width="1.5"/>
+      <rect x="36" y="16" width="38" height="14" rx="2" fill="#3a2810" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M38 46 Q43 41 48 46" stroke="#2a1808" stroke-width="2" fill="none"/>
+      <path d="M62 46 Q67 41 72 46" stroke="#2a1808" stroke-width="2" fill="none"/>
+      <ellipse cx="43" cy="52" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="44" cy="53" r="2.8" fill="#2a1808"/>
+      <ellipse cx="67" cy="52" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="68" cy="53" r="2.8" fill="#2a1808"/>
+      <path d="M42 66 Q55 74 68 66" stroke="#1a1008" stroke-width="2.5" fill="none"/>
+      <circle cx="34" cy="58" r="9" fill="#ffb070" opacity=".5"/>
+      <circle cx="76" cy="58" r="9" fill="#ffb070" opacity=".5"/>
+      <path d="M96 108 Q108 94 106 80" stroke="#e8c880" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="96" cy="76" r="6" fill="#d4a017" stroke="#1a1008"/>
+      <circle cx="104" cy="72" r="6" fill="#d4a017" stroke="#1a1008"/>
+      <circle cx="100" cy="68" r="5" fill="#b8860b" stroke="#1a1008"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub r"><span class="who">💰 MERCANTE DI SIVIGLIA</span>«Ammiraglio, le vostre navi hanno aperto la via a commerci infiniti. Zucchero, cacao, oro, tabacco: solo alcuni dei prodotti di cui l'Europa è oggi detentrice.»</div>
+    <div class="bub r"><span class="who">💰 MERCANTE DI SIVIGLIA</span>«È grazie alla sua scoperta se oggi viviamo di quelle rotte e di quei prodotti.»</div>
+    <div class="bub r"><span class="who">💰 MERCANTE DI SIVIGLIA</span>«Sì, vi è stato dolore, forse troppo, ma il progresso esige sacrifici. Non esistono scoperte senza conquista.»</div>
+  </div>
+</div>
+
+<div class="panel tilt-r">
+  <div class="pnum">18</div>
+  <div class="pcap green">🌿 Garocuya risponde con rabbia</div>
+  <div class="char-area">
+    <svg width="115" height="150" viewBox="0 0 115 150" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 150 Q20 104 57 96 Q94 104 98 150Z" fill="#c87830" stroke="#1a1008" stroke-width="2"/>
+      <path d="M26 120 Q42 112 56 120" stroke="#8b1a1a" stroke-width="2" fill="none"/>
+      <path d="M70 118 Q84 110 98 118" stroke="#8b1a1a" stroke-width="2" fill="none"/>
+      <path d="M20 132 Q12 118 16 104" stroke="#c87830" stroke-width="9" stroke-linecap="round"/>
+      <path d="M16 102 Q10 94 12 86" stroke="#c87830" stroke-width="8" stroke-linecap="round"/>
+      <ellipse cx="57" cy="50" rx="24" ry="24" fill="#c87830" stroke="#1a1008" stroke-width="2.2"/>
+      <path d="M33 46 Q57 22 81 46" fill="#1a0a00" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M33 46 Q25 62 27 82" stroke="#1a0a00" stroke-width="7" stroke-linecap="round"/>
+      <path d="M81 46 Q89 62 87 82" stroke="#1a0a00" stroke-width="7" stroke-linecap="round"/>
+      <path d="M83 42 Q96 18 90 32 Q102 14 96 30 Q101 18 99 34Z" fill="#e84020" stroke="#1a1008" stroke-width="1"/>
+      <!-- angry eyes with v-brows -->
+      <path d="M44 48 Q50 42 56 48" stroke="#3a1a08" stroke-width="3" fill="none"/>
+      <path d="M58 48 Q64 42 70 48" stroke="#3a1a08" stroke-width="3" fill="none"/>
+      <ellipse cx="50" cy="54" rx="5" ry="5.5" fill="white" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="51" cy="55" r="3" fill="#1a1008"/>
+      <ellipse cx="70" cy="54" rx="5" ry="5.5" fill="white" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="71" cy="55" r="3" fill="#1a1008"/>
+      <!-- angry open mouth -->
+      <path d="M49 69 Q57 76 65 69 Q61 78 57 80 Q53 78 49 69Z" fill="#8b3010" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- raised fist -->
+      <path d="M98 122 Q110 106 110 88" stroke="#c87830" stroke-width="9" stroke-linecap="round"/>
+      <rect x="103" y="80" width="14" height="13" rx="5" fill="#c87830" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- anger marks -->
+      <path d="M86 38 L90 44" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/>
+      <path d="M92 36 L96 42" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">🌿 GAROCUYA</span>«Progresso per voi, distruzione per noi!»</div>
+    <div class="bub l"><span class="who">🌿 GAROCUYA</span>«Noi non siamo stati "scoperti", noi esistevamo già!»</div>
+    <div class="bub l"><span class="who">🌿 GAROCUYA</span>«Ciò che avete fatto è stato cancellare la nostra voce.»</div>
+  </div>
+</div>
+</div>
+
+<!-- Marinaio si interroga + Regina riflessiva -->
+<div class="strip s2">
+<div class="panel tilt-l">
+  <div class="pnum">19</div>
+  <div class="pcap orange">🌊 Il Marinaio si interroga</div>
+  <div class="char-area">
+    <svg width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 140 Q20 98 55 90 Q90 98 94 140Z" fill="#3a5a8a" stroke="#1a1008" stroke-width="2"/>
+      <path d="M33 100 Q55 90 77 100" stroke="#5a7aaa" stroke-width="3" fill="none"/>
+      <path d="M31 110 Q55 100 79 110" stroke="#5a7aaa" stroke-width="3" fill="none"/>
+      <rect x="28" y="120" width="54" height="7" rx="3" fill="#8b6914" stroke="#1a1008" stroke-width="1.2"/>
+      <ellipse cx="55" cy="52" rx="22" ry="22" fill="#d4956a" stroke="#1a1008" stroke-width="2"/>
+      <path d="M33 46 Q55 34 77 46 L75 52 Q55 44 35 52Z" fill="#c0392b" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- sad brows down -->
+      <path d="M38 52 Q44 47 50 51" stroke="#3a1a08" stroke-width="2" fill="none"/>
+      <path d="M60 51 Q66 47 72 52" stroke="#3a1a08" stroke-width="2" fill="none"/>
+      <ellipse cx="44" cy="57" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="44" cy="58" r="2.5" fill="#2a1808"/>
+      <ellipse cx="66" cy="57" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="66" cy="58" r="2.5" fill="#2a1808"/>
+      <!-- sad mouth -->
+      <path d="M46 70 Q55 66 64 70" stroke="#1a1008" stroke-width="1.8" fill="none"/>
+      <!-- hand on chest -->
+      <path d="M20 120 Q10 106 12 90" stroke="#d4956a" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="12" cy="87" rx="8" ry="9" fill="#d4956a" stroke="#1a1008" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">🌊 MARINAIO PAOLO</span>«La tua voce oggi suona come la voce di un popolo ferito.»</div>
+    <div class="bub l"><span class="who">🌊 MARINAIO PAOLO</span>«Hai ragione… Non era nostro diritto prendere con la forza la terra in cui siete nati, la vostra terra.»</div>
+    <div class="bub l"><span class="who">🌊 MARINAIO PAOLO</span>«Forse, e mi rivolgo alla corte intera, ai giudici e agli stessi Sovrani: era davvero necessario?»</div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="pnum">20</div>
+  <div class="pcap purple">👑 Regina Isabella – momento di riflessione</div>
+  <div class="char-area">
+    <svg width="115" height="150" viewBox="0 0 115 150" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 150 Q20 108 57 100 Q94 108 98 150Z" fill="#6b1a6b" stroke="#1a1008" stroke-width="2"/>
+      <path d="M34 108 Q57 100 80 108 L76 124 H38Z" fill="#8b2a8b" stroke="#1a1008" stroke-width="1.5"/>
+      <ellipse cx="57" cy="54" rx="23" ry="24" fill="#f5dcb0" stroke="#1a1008" stroke-width="2.2"/>
+      <path d="M34 46 L38 28 L47 42 L57 26 L67 42 L76 28 L80 46Z" fill="#d4a017" stroke="#1a1008" stroke-width="1.5"/>
+      <rect x="34" y="44" width="46" height="9" rx="3" fill="#b8860b" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="47" cy="49" r="3" fill="#c0392b"/>
+      <circle cx="57" cy="49" r="3" fill="#2980b9"/>
+      <circle cx="67" cy="49" r="3" fill="#27ae60"/>
+      <path d="M34 60 Q28 74 30 90" stroke="#e8d5a3" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+      <path d="M80 60 Q86 74 84 90" stroke="#e8d5a3" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+      <!-- downcast eyes -->
+      <ellipse cx="48" cy="58" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="49" cy="60" r="2.5" fill="#2a1808"/>
+      <ellipse cx="66" cy="58" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="67" cy="60" r="2.5" fill="#2a1808"/>
+      <path d="M44 52 Q48 48 52 51" stroke="#3a2010" stroke-width="1.8" fill="none"/>
+      <path d="M62 51 Q66 48 70 52" stroke="#3a2010" stroke-width="1.8" fill="none"/>
+      <!-- sad mouth -->
+      <path d="M48 70 Q57 66 66 70" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+      <!-- hand on chin thoughtful -->
+      <path d="M34 118 Q22 104 24 88" stroke="#f5dcb0" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="24" cy="85" rx="9" ry="10" fill="#f5dcb0" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- thought bubble -->
+      <circle cx="88" cy="28" r="18" fill="#fffff0" stroke="#1a1008" stroke-width="1.5" opacity=".95"/>
+      <circle cx="74" cy="46" r="5" fill="#fffff0" stroke="#1a1008" stroke-width="1" opacity=".9"/>
+      <circle cx="70" cy="55" r="3" fill="#fffff0" stroke="#1a1008" stroke-width="1" opacity=".85"/>
+      <text x="88" y="24" text-anchor="middle" font-family="'Patrick Hand',cursive" font-size="7.5" fill="#c0392b">Che valore ha</text>
+      <text x="88" y="34" text-anchor="middle" font-family="'Patrick Hand',cursive" font-size="7.5" fill="#c0392b">un regno fondato</text>
+      <text x="88" y="44" text-anchor="middle" font-family="'Patrick Hand',cursive" font-size="7.5" fill="#c0392b">sul dolore?</text>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">👑 REGINA ISABELLA</span>«Il progresso ha portato ricchezze che ci permettono di elevarci. Eppure, che valore ha un regno che si fonda sulla sofferenza?»</div>
+    <div class="bub l"><span class="who">👑 REGINA ISABELLA</span>«Noi che diciamo di ispirarci ai valori di Dio, abbiamo preso il suo ruolo di giudice supremo. I popoli del Nuovo Mondo sono creature di Dio quanto noi.»</div>
+    <div class="bub l"><span class="who">👑 REGINA ISABELLA</span>«La grandezza della Spagna non può poggiare sul silenzio dei deboli.»</div>
+  </div>
+</div>
+</div>
+
+<!-- Colombo difensivo + Giudice interrompe -->
+<div class="strip s2">
+<div class="panel tilt-r">
+  <div class="pnum">21</div>
+  <div class="pcap red">⚓ Colombo – difesa finale</div>
+  <div class="char-area">
+    <svg width="105" height="135" viewBox="0 0 105 135" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 135 Q18 96 52 88 Q86 96 90 135Z" fill="#c0392b" stroke="#1a1008" stroke-width="2"/>
+      <path d="M30 98 Q52 90 74 98 L70 114 H34Z" fill="#d4a040" stroke="#1a1008" stroke-width="1.5"/>
+      <ellipse cx="52" cy="50" rx="21" ry="22" fill="#f5dcb0" stroke="#1a1008" stroke-width="2"/>
+      <path d="M31 46 Q52 22 73 46" fill="#2a1808" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M31 46 Q24 60 27 74" stroke="#2a1808" stroke-width="6" stroke-linecap="round"/>
+      <path d="M73 46 Q80 60 77 74" stroke="#2a1808" stroke-width="6" stroke-linecap="round"/>
+      <path d="M36 50 Q42 44 48 49" stroke="#2a1808" stroke-width="2.2" fill="none"/>
+      <path d="M56 49 Q62 44 68 50" stroke="#2a1808" stroke-width="2.2" fill="none"/>
+      <ellipse cx="42" cy="55" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="43" cy="56" r="2.5" fill="#2a1808"/>
+      <ellipse cx="62" cy="55" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="63" cy="56" r="2.5" fill="#2a1808"/>
+      <path d="M44 67 Q52 71 60 67" stroke="#1a1008" stroke-width="1.8" fill="none"/>
+      <path d="M34 66 Q52 80 70 66 Q64 80 52 82 Q40 80 34 66Z" fill="#3a2010" stroke="#1a1008" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Io non ho fatto altro che seguire un sogno e servire il mio re e la mia regina.»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Volevo nuove rotte, non uno sterminio.»</div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="pnum">22</div>
+  <div class="pcap blue">⚖️ Il Giudice interrompe tutti</div>
+  <div class="char-area">
+    <svg width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 140 Q20 98 55 90 Q90 98 94 140Z" fill="#2a2860" stroke="#1a1008" stroke-width="2"/>
+      <path d="M32 92 Q55 86 78 92 L74 106 H36Z" fill="#f0f0e8" stroke="#1a1008" stroke-width="1.2"/>
+      <ellipse cx="55" cy="50" rx="22" ry="22" fill="#f5dcb0" stroke="#1a1008" stroke-width="2"/>
+      <path d="M33 46 Q44 22 55 20 Q66 22 77 46" fill="#e0ddd0" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M33 46 Q26 62 30 78" stroke="#e0ddd0" stroke-width="6" stroke-linecap="round"/>
+      <path d="M77 46 Q84 62 80 78" stroke="#e0ddd0" stroke-width="6" stroke-linecap="round"/>
+      <path d="M38 46 Q43 41 48 45" stroke="#3a2010" stroke-width="2.5" fill="none"/>
+      <path d="M62 45 Q67 41 72 46" stroke="#3a2010" stroke-width="2.5" fill="none"/>
+      <ellipse cx="43" cy="51" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="43" cy="52" r="2.5" fill="#1a1008"/>
+      <ellipse cx="67" cy="51" rx="4" ry="4.5" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="67" cy="52" r="2.5" fill="#1a1008"/>
+      <path d="M44 64 Q55 61 66 64" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+      <!-- gavel SLAMMING with lines -->
+      <path d="M72 96 Q84 82 88 70" stroke="#f5dcb0" stroke-width="8" stroke-linecap="round"/>
+      <rect x="84" y="62" width="18" height="10" rx="3" fill="#4a2a08" stroke="#1a1008" stroke-width="1.2" transform="rotate(20 84 62)"/>
+      <rect x="88" y="66" width="6" height="20" rx="2" fill="#6a3a10" stroke="#1a1008" stroke-width="1" transform="rotate(20 84 62)"/>
+      <!-- impact lines -->
+      <path d="M96 56 L102 50" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M100 62 L108 60" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M98 50 L102 44" stroke="#1a1008" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«BASTA!»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«È chiaro che la scoperta porta con sé due volti: gloria e violazione.»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Questo processo non può cancellare ciò che è accaduto. Ma forse può insegnarci che ogni scoperta porta delle responsabilità.»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Non spetta né a me, né a noi dare oggi l'ultima parola, ma alla storia e a chi la ricorderà.»</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCENA V – LA SENTENZA
+══════════════════════════════════ -->
+<div class="scene-header"><span class="scene-icon">📜</span> Scena V – La Sentenza e la Memoria</div>
+<div class="doodle-row">🎭 📜 ⚖️ 📜 🎭</div>
+
+<!-- sentenza grande pannello -->
+<div class="strip s1">
+<div class="panel" style="border:3px solid #c0392b; box-shadow:4px 4px 0 #c0392b;">
+  <div class="pnum">23</div>
+  <div class="pcap red">⚖️ Il Giudice legge la Sentenza – tutti in piedi</div>
+  <div class="char-area">
+    <!-- panoramic scene, all standing -->
+    <svg width="100%" viewBox="0 0 580 180" xmlns="http://www.w3.org/2000/svg" style="max-width:580px">
+      <!-- floor -->
+      <rect x="0" y="148" width="580" height="32" fill="#c9a96e" opacity=".5"/>
+      <!-- back wall -->
+      <rect x="0" y="0" width="580" height="150" fill="#f0e0c0" opacity=".4"/>
+      <!-- scroll on bench -->
+      <rect x="222" y="80" width="136" height="72" rx="4" fill="#fdf3d0" stroke="#c0392b" stroke-width="2"/>
+      <line x1="230" y1="92" x2="350" y2="92" stroke="#c0392b" stroke-width="1.2"/>
+      <line x1="230" y1="102" x2="350" y2="102" stroke="#8b5e2a" stroke-width="1"/>
+      <line x1="230" y1="112" x2="350" y2="112" stroke="#8b5e2a" stroke-width="1"/>
+      <line x1="230" y1="122" x2="340" y2="122" stroke="#8b5e2a" stroke-width="1"/>
+      <line x1="230" y1="132" x2="320" y2="132" stroke="#8b5e2a" stroke-width="1"/>
+      <!-- bench -->
+      <rect x="200" y="76" width="180" height="72" rx="3" fill="#8b5e2a" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- judge at bench -->
+      <path d="M262 76 Q290 68 318 76 L314 148 H266Z" fill="#2a2860" stroke="#1a1008" stroke-width="1.8"/>
+      <path d="M272 70 Q290 62 308 70 L304 80 H276Z" fill="#f0f0e8" stroke="#1a1008" stroke-width="1"/>
+      <circle cx="290" cy="50" r="20" fill="#f5dcb0" stroke="#1a1008" stroke-width="2"/>
+      <path d="M270 46 Q280 24 290 22 Q300 24 310 46" fill="#e0ddd0" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M270 46 Q263 60 266 72" stroke="#e0ddd0" stroke-width="5" stroke-linecap="round"/>
+      <path d="M310 46 Q317 60 314 72" stroke="#e0ddd0" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="282" cy="50" r="3.5" fill="#1a1008"/>
+      <circle cx="298" cy="50" r="3.5" fill="#1a1008"/>
+      <path d="M283 60 Q290 57 297 60" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+      <!-- colombo left head bowed -->
+      <path d="M80 148 Q84 108 114 100 Q144 108 148 148Z" fill="#c0392b" stroke="#1a1008" stroke-width="1.8"/>
+      <circle cx="114" cy="82" r="19" fill="#f5dcb0" stroke="#1a1008" stroke-width="1.8"/>
+      <path d="M95 78 Q114 58 133 78" fill="#2a1808" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="106" cy="84" r="3" fill="#2a1808"/>
+      <circle cx="122" cy="84" r="3" fill="#2a1808"/>
+      <!-- head bowed -->
+      <path d="M99 90 Q114 96 129 90" stroke="#3a2010" stroke-width="2" fill="none"/>
+      <!-- frate right side -->
+      <path d="M432 148 Q436 108 466 100 Q496 108 500 148Z" fill="#6b4a1a" stroke="#1a1008" stroke-width="1.8"/>
+      <path d="M449 92 Q466 82 483 92" fill="#5a3a10" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="466" cy="78" r="19" fill="#d4b07a" stroke="#1a1008" stroke-width="1.8"/>
+      <circle cx="457" cy="82" r="3" fill="#1a1008"/>
+      <circle cx="475" cy="82" r="3" fill="#1a1008"/>
+      <!-- isabella background -->
+      <path d="M158 148 Q162 108 190 100 Q218 108 222 148Z" fill="#6b1a6b" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="190" cy="78" r="17" fill="#f5dcb0" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M174 70 L177 58 L183 68 L190 54 L197 68 L203 58 L206 70Z" fill="#d4a017" stroke="#1a1008" stroke-width="1.2"/>
+      <!-- merchant background -->
+      <path d="M358 148 Q362 108 390 100 Q418 108 422 148Z" fill="#5a4a1a" stroke="#1a1008" stroke-width="1.5"/>
+      <circle cx="390" cy="78" r="17" fill="#e8c880" stroke="#1a1008" stroke-width="1.5"/>
+      <ellipse cx="390" cy="62" rx="20" ry="7" fill="#3a2810" stroke="#1a1008" stroke-width="1"/>
+      <!-- taino small behind -->
+      <circle cx="510" cy="80" r="15" fill="#c87830" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M495 76 Q510 60 525 76" fill="#1a0a00" stroke="#1a1008" stroke-width="1"/>
+      <!-- light rays from scroll -->
+      <path d="M290 80 L200 148" stroke="#d4a017" stroke-width=".5" opacity=".3"/>
+      <path d="M290 80 L380 148" stroke="#d4a017" stroke-width=".5" opacity=".3"/>
+      <path d="M290 80 L100 148" stroke="#d4a017" stroke-width=".5" opacity=".2"/>
+      <path d="M290 80 L480 148" stroke="#d4a017" stroke-width=".5" opacity=".2"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Ammiraglio Cristoforo Colombo, la Corte riconosce in voi il volto dell'uomo che ha cambiato la storia, un uomo grazie al cui sapere e coraggio possiamo oggi godere di prodotti e ricchezze altrimenti sconosciute.»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Un uomo che darà avvio a un periodo storico nuovo, una nuova epoca, che i posteri studieranno con ammirazione.»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«Tuttavia, grazie al dibattito oggi affrontato, dobbiamo riconoscere anche che la vostra impresa ha aperto la via a un susseguirsi di violenze e ingiustizie nei confronti delle popolazioni indigene.»</div>
+    <div class="bub l"><span class="who">⚖️ GIUDICE</span>«La vostra impresa avrà sempre uno scheletro addosso. La gloria e la colpa cammineranno insieme nel vostro nome.»</div>
+  </div>
+</div>
+</div>
+
+<!-- colombo risposta finale -->
+<div class="strip s2">
+<div class="panel tilt-l">
+  <div class="pnum">24</div>
+  <div class="pcap red">⚓ Colombo – l'ultima parola</div>
+  <div class="char-area">
+    <svg width="110" height="145" viewBox="0 0 110 145" xmlns="http://www.w3.org/2000/svg">
+      <!-- colombo head bowed, repentant -->
+      <path d="M14 145 Q18 100 55 92 Q92 100 96 145Z" fill="#922b21" stroke="#1a1008" stroke-width="2"/>
+      <path d="M32 104 Q55 96 78 104 L74 118 H36Z" fill="#d4a040" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- head tilted down -->
+      <ellipse cx="55" cy="52" rx="22" ry="22" fill="#f5dcb0" stroke="#1a1008" stroke-width="2" transform="rotate(15 55 52)"/>
+      <path d="M34 46 Q55 22 76 46" fill="#2a1808" stroke="#1a1008" stroke-width="1.5"/>
+      <path d="M34 46 Q27 60 30 74" stroke="#2a1808" stroke-width="6" stroke-linecap="round"/>
+      <path d="M76 46 Q83 60 80 74" stroke="#2a1808" stroke-width="6" stroke-linecap="round"/>
+      <!-- sad drooping eyes -->
+      <ellipse cx="44" cy="56" rx="4" ry="4" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="44" cy="57" r="2.2" fill="#2a1808"/>
+      <ellipse cx="66" cy="58" rx="4" ry="4" fill="white" stroke="#1a1008" stroke-width="1.2"/>
+      <circle cx="66" cy="59" r="2.2" fill="#2a1808"/>
+      <!-- single tear -->
+      <path d="M42 62 Q40 68 42 74" stroke="#6ab0d4" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <!-- sad mouth -->
+      <path d="M47 70 Q55 66 63 70" stroke="#1a1008" stroke-width="1.8" fill="none"/>
+      <path d="M36 68 Q55 82 74 68 Q68 82 55 84 Q42 82 36 68Z" fill="#3a2010" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- hands clasped in prayer -->
+      <path d="M30 118 Q20 106 22 92" stroke="#f5dcb0" stroke-width="8" stroke-linecap="round"/>
+      <path d="M80 118 Q90 106 88 92" stroke="#f5dcb0" stroke-width="8" stroke-linecap="round"/>
+      <!-- clasped hands center -->
+      <ellipse cx="55" cy="130" rx="14" ry="10" fill="#f5dcb0" stroke="#1a1008" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Se la mia impresa ha portato dolore, possa Dio perdonarmi.»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Ma sappiate che ho navigato per un sogno di conoscenza e di fede che mi porto dentro sin dalla tenera età, quando ammiravo le navi salpare e sognavo terre sconosciute.»</div>
+    <div class="bub r"><span class="who">⚓ COLOMBO</span>«Mi rimetto a voi, come uomo e come cristiano. Lasciate che la storia giudichi meglio di noi.»</div>
+  </div>
+</div>
+
+<!-- cronista epilogo -->
+<div class="panel">
+  <div class="pnum">25</div>
+  <div class="pcap blue">📜 Il Cronista – Epilogo finale</div>
+  <div class="char-area">
+    <!-- ocean + ship at dusk -->
+    <svg width="115" height="150" viewBox="0 0 115 150" xmlns="http://www.w3.org/2000/svg">
+      <!-- sky gradient -->
+      <rect x="0" y="0" width="115" height="90" fill="#f5c880" opacity=".5"/>
+      <rect x="0" y="60" width="115" height="30" fill="#e87040" opacity=".3"/>
+      <!-- sun setting -->
+      <circle cx="80" cy="55" r="20" fill="#f5c040" opacity=".7"/>
+      <path d="M0 80 Q57 70 115 80 L115 150 L0 150Z" fill="#2a5a8a" opacity=".7"/>
+      <!-- waves -->
+      <path d="M0 95 Q15 88 30 95 Q45 102 60 95 Q75 88 90 95 Q105 102 115 95" stroke="#6ab0d4" stroke-width="2" fill="none"/>
+      <path d="M0 110 Q15 104 30 110 Q45 116 60 110 Q75 104 90 110 Q105 116 115 110" stroke="#4a90b4" stroke-width="1.5" fill="none"/>
+      <!-- ship small on horizon -->
+      <rect x="42" y="74" width="30" height="12" rx="2" fill="#2a1808" opacity=".9"/>
+      <rect x="56" y="44" width="3" height="32" fill="#2a1808" opacity=".9"/>
+      <path d="M59 46 L74 60 L59 64Z" fill="#f5e9cc" opacity=".85" stroke="#1a1008" stroke-width=".8"/>
+      <path d="M57 48 L43 60 L57 64Z" fill="#f5e9cc" opacity=".85" stroke="#1a1008" stroke-width=".8"/>
+      <!-- cronista silhouette foreground writing -->
+      <path d="M8 150 Q10 120 24 114 Q38 120 40 150Z" fill="#2a1808" opacity=".85"/>
+      <circle cx="24" cy="104" r="12" fill="#2a1808" opacity=".85"/>
+      <!-- quill -->
+      <path d="M34 116 Q28 106 32 100 Q28 110 34 116Z" fill="#e8e8d8" opacity=".9"/>
+      <!-- scroll in hand -->
+      <rect x="8" y="116" width="20" height="22" rx="2" fill="#fdf3d0" opacity=".9" stroke="#1a1008" stroke-width="1"/>
+      <!-- question mark in sky -->
+      <text x="88" y="42" font-family="'Schoolbell',cursive" font-size="28" fill="#c0392b" opacity=".4">?</text>
+    </svg>
+  </div>
+  <div class="bubbles">
+    <div class="bub narr">«Così si chiude il processo all'Ammiraglio Cristoforo Colombo. Le voci hanno parlato: c'è chi vede Colombo come un eroe e chi come conquistatore colpevole.»</div>
+    <div class="bub narr">«Gli archivi della storia conserveranno le sue mappe e le sue colpe. Le onde dell'Oceano porteranno per sempre la sua memoria, tra luce e ombra, tra scoperta e conquista.»</div>
+    <div class="bub narr">«Una domanda resta ferma nella mente: chi paga il prezzo della scoperta?»</div>
+  </div>
+</div>
+</div>
+
+<!-- domanda finale agli spettatori -->
+<div class="final-box">
+  🎭 E voi, cari spettatori…
+  <br>come giudicate questa pagina della Storia? 🎭
+  <span class="sub">→ Discussione in classe: raccogliamo le vostre opinioni in un brainstorming finale!</span>
+</div>
+
+<div class="doodle-row" style="margin-top:16px; opacity:.4;">⚓ 🌊 ⚓ 🌊 ⚓ 🌊 ⚓ 🌊 ⚓</div>
+
+</div><!-- /content -->
+</div><!-- /notebook -->
+
+<!-- LAUNCH -->
+<button id="vp-launch" onclick="vpOpen()">🎬 Guarda il Fumetto-Video</button>
+
+<!-- PLAYER OVERLAY -->
+<div id="vp-overlay" class="hidden">
+<div id="vp-box">
+  <button id="vp-x" onclick="vpClose()">✕</button>
+
+  <!-- Safari unlock screen -->
+  <div id="vp-unlock">
+    <h2>🎙️ Attiva le voci</h2>
+    <p>Safari richiede un tocco diretto per abilitare la sintesi vocale.<br>Premi il pulsante qui sotto per sbloccarla.</p>
+    <button id="vp-unlock-btn" onclick="unlockAudio()">🔊 Sblocca le voci e inizia</button>
+  </div>
+
+  <!-- progress -->
+  <div id="vp-prog-track" onclick="progClick(event)">
+    <div id="vp-prog-fill"></div>
+  </div>
+
+  <!-- panel -->
+  <div id="vp-panel">
+    <div id="vp-cap"></div>
+    <div id="vp-svg"></div>
+    <div id="vp-dlg">
+      <div id="vp-who"></div>
+      <div id="vp-txt"></div>
+    </div>
+  </div>
+
+  <!-- thumbs -->
+  <div id="vp-thumbs"></div>
+
+  <!-- controls -->
+  <div id="vp-ctrl">
+    <button class="cb" onclick="vpPrev()">⏮</button>
+    <button id="btn-play"  class="cb pri" onclick="vpPlay()">▶ Avvia</button>
+    <button id="btn-pause" class="cb pri" onclick="vpPause()" style="display:none">⏸ Pausa</button>
+    <button class="cb" onclick="vpNext()">⏭</button>
+    <select id="vp-speed" onchange="setSpd(this.value)">
+      <option value=".65">Lento 0.65×</option>
+      <option value=".8">Lento 0.8×</option>
+      <option value="1" selected>Normale 1×</option>
+      <option value="1.2">Veloce 1.2×</option>
+    </select>
+    <div id="vp-info">1 / 25</div>
+  </div>
+</div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────
+const PANELS = [{"num": 1, "pcap": "📜 Il Narratore – Anno del Signore 1500", "bubbles": [{"who": "", "text": "«Anno del Signore 1500. Nella Corte di Castiglia, sotto lo sguardo vigile dei Sovrani Cattolici, si apre il processo a Cristoforo Colombo, Ammiraglio del Mare Oceano. Eroe o tiranno? Navigatore o Conquistatore? Il tribunale qui presente giudicherà.»"}], "svg": "<svg width=\"100%\" viewBox=\"0 0 520 160\" xmlns=\"http://www.w3.org/2000/svg\" style=\"max-width:520px\">\n      <!-- floor -->\n      <rect x=\"0\" y=\"130\" width=\"520\" height=\"30\" fill=\"#d4b483\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- back wall, wavy hand-drawn -->\n      <path d=\"M0 130 L0 20 Q30 14 80 18 Q160 8 260 12 Q360 8 440 18 Q490 14 520 20 L520 130Z\" fill=\"#f0e0c0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <!-- window arches -->\n      <ellipse cx=\"120\" cy=\"55\" rx=\"32\" ry=\"28\" fill=\"#c8e8f8\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <line x1=\"120\" y1=\"27\" x2=\"120\" y2=\"83\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <line x1=\"88\" y1=\"55\" x2=\"152\" y2=\"55\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <ellipse cx=\"400\" cy=\"55\" rx=\"32\" ry=\"28\" fill=\"#c8e8f8\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <line x1=\"400\" y1=\"27\" x2=\"400\" y2=\"83\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <line x1=\"368\" y1=\"55\" x2=\"432\" y2=\"55\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <!-- judge bench, wobbly rect -->\n      <path d=\"M190 85 Q260 80 330 85 L328 130 H192Z\" fill=\"#8b5e2a\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <rect x=\"196\" y=\"76\" width=\"128\" height=\"14\" rx=\"4\" fill=\"#a06830\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- JUDGE figure – hand drawn style -->\n      <!-- body robe dark -->\n      <path d=\"M242 76 Q260 70 278 76 L282 130 H238Z\" fill=\"#2a2860\" stroke=\"#1a1008\" stroke-width=\"1.8\"/>\n      <!-- head round -->\n      <circle cx=\"260\" cy=\"54\" r=\"18\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <!-- wig wavy -->\n      <path d=\"M242 50 Q250 28 260 26 Q270 28 278 50\" fill=\"#e0ddd0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M242 50 Q236 64 238 76\" stroke=\"#e0ddd0\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n      <path d=\"M278 50 Q284 64 282 76\" stroke=\"#e0ddd0\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n      <!-- eyes dots -->\n      <circle cx=\"253\" cy=\"54\" r=\"3\" fill=\"#1a1008\"/>\n      <circle cx=\"267\" cy=\"54\" r=\"3\" fill=\"#1a1008\"/>\n      <!-- eyebrow lines -->\n      <path d=\"M249 48 Q253 45 257 48\" stroke=\"#1a1008\" stroke-width=\"1.5\" fill=\"none\"/>\n      <path d=\"M263 48 Q267 45 271 48\" stroke=\"#1a1008\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- serious mouth -->\n      <path d=\"M253 64 Q260 62 267 64\" stroke=\"#8b5e2a\" stroke-width=\"1.8\" fill=\"none\"/>\n      <!-- gavel -->\n      <rect x=\"268\" y=\"78\" width=\"6\" height=\"22\" rx=\"2\" fill=\"#6a3a10\" stroke=\"#1a1008\" stroke-width=\"1\" transform=\"rotate(15,268,78)\"/>\n      <rect x=\"264\" y=\"74\" width=\"16\" height=\"9\" rx=\"3\" fill=\"#4a2a08\" stroke=\"#1a1008\" stroke-width=\"1\" transform=\"rotate(15,268,78)\"/>\n      <!-- parchment on bench -->\n      <rect x=\"218\" y=\"80\" width=\"34\" height=\"22\" rx=\"3\" fill=\"#fdf3d0\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <line x1=\"222\" y1=\"87\" x2=\"248\" y2=\"87\" stroke=\"#8b5e2a\" stroke-width=\".8\"/>\n      <line x1=\"222\" y1=\"93\" x2=\"248\" y2=\"93\" stroke=\"#8b5e2a\" stroke-width=\".8\"/>\n      <!-- left side crowd boxes -->\n      <rect x=\"14\" y=\"92\" width=\"60\" height=\"38\" rx=\"3\" fill=\"#c09050\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"30\" cy=\"88\" r=\"9\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"50\" cy=\"90\" r=\"9\" fill=\"#d4956a\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- right crowd -->\n      <rect x=\"446\" y=\"92\" width=\"60\" height=\"38\" rx=\"3\" fill=\"#c09050\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"462\" cy=\"88\" r=\"9\" fill=\"#c87830\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"482\" cy=\"90\" r=\"9\" fill=\"#e8c880\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- torches -->\n      <rect x=\"46\" y=\"36\" width=\"6\" height=\"26\" fill=\"#6a3a10\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <path d=\"M46 36 Q49 22 52 36Z\" fill=\"#e87030\"/>\n      <path d=\"M47 28 Q49 23 51 28Z\" fill=\"#f8c050\"/>\n      <rect x=\"468\" y=\"36\" width=\"6\" height=\"26\" fill=\"#6a3a10\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <path d=\"M468 36 Q471 22 474 36Z\" fill=\"#e87030\"/>\n      <path d=\"M469 28 Q471 23 473 28Z\" fill=\"#f8c050\"/>\n      <!-- text label -->\n      <text x=\"260\" y=\"148\" text-anchor=\"middle\" font-family=\"'Patrick Hand',cursive\" font-size=\"11\" fill=\"#5a3a1a\">Corte di Castiglia · Anno 1500</text>\n    </svg>"}, {"num": 2, "pcap": "⚖️ Il Giudice apre il processo", "bubbles": [{"who": "⚖️ GIUDICE", "text": "«In nome dei Re di Spagna, si apre oggi, in questa corte simbolica, il processo a Cristoforo Colombo.»"}, {"who": "⚖️ GIUDICE", "text": "«La questione: con le sue gesta l'Ammiraglio si è fatto portatore di glorie o di distruzione? Saranno ascoltate testimonianze da entrambe le parti.»"}, {"who": "⚖️ GIUDICE", "text": "«Ammiraglio Colombo, si presenti!»"}], "svg": "<svg width=\"110\" height=\"140\" viewBox=\"0 0 110 140\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- robe -->\n      <path d=\"M18 140 Q22 96 55 90 Q88 96 92 140Z\" fill=\"#2a2860\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <!-- white collar -->\n      <path d=\"M38 92 Q55 86 72 92 L68 106 H42Z\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <!-- head slightly oval, hand-drawn -->\n      <ellipse cx=\"55\" cy=\"54\" rx=\"22\" ry=\"23\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2.2\"/>\n      <!-- wig -->\n      <path d=\"M33 50 Q44 24 55 22 Q66 24 77 50\" fill=\"#e0ddd0\" stroke=\"#1a1008\" stroke-width=\"1.8\"/>\n      <path d=\"M33 50 Q26 66 30 82\" stroke=\"#e0ddd0\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M77 50 Q84 66 80 82\" stroke=\"#e0ddd0\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <!-- thick eyebrows serious -->\n      <path d=\"M39 50 Q44 45 49 49\" stroke=\"#3a2010\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\"/>\n      <path d=\"M61 49 Q66 45 71 50\" stroke=\"#3a2010\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\"/>\n      <!-- eyes -->\n      <ellipse cx=\"44\" cy=\"55\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"44\" cy=\"56\" r=\"2.5\" fill=\"#1a1008\"/>\n      <ellipse cx=\"66\" cy=\"55\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"66\" cy=\"56\" r=\"2.5\" fill=\"#1a1008\"/>\n      <!-- nose simple bump -->\n      <path d=\"M53 58 Q55 64 57 58\" stroke=\"#8b5e2a\" stroke-width=\"1.2\" fill=\"none\"/>\n      <!-- tight lips -->\n      <path d=\"M44 70 Q55 67 66 70\" stroke=\"#1a1008\" stroke-width=\"1.8\" fill=\"none\"/>\n      <!-- gavel in hand -->\n      <path d=\"M72 100 Q82 88 86 78\" stroke=\"#f5dcb0\" stroke-width=\"8\" stroke-linecap=\"round\"/>\n      <rect x=\"82\" y=\"70\" width=\"18\" height=\"10\" rx=\"3\" fill=\"#4a2a08\" stroke=\"#1a1008\" stroke-width=\"1.2\" transform=\"rotate(20 82 70)\"/>\n      <rect x=\"86\" y=\"74\" width=\"6\" height=\"20\" rx=\"2\" fill=\"#6a3a10\" stroke=\"#1a1008\" stroke-width=\"1\" transform=\"rotate(20 82 70)\"/>\n      <!-- blush marks like kids draw -->\n      <circle cx=\"36\" cy=\"60\" r=\"5\" fill=\"#ffb0b0\" opacity=\".5\"/>\n      <circle cx=\"74\" cy=\"60\" r=\"5\" fill=\"#ffb0b0\" opacity=\".5\"/>\n    </svg>"}, {"num": 3, "pcap": "⚓ Cristoforo Colombo si presenta", "bubbles": [{"who": "⚓ COLOMBO", "text": "«Io sono Cristoforo Colombo, l'uomo che nel 1492 ha aperto nuove rotte commerciali verso occidente.»"}, {"who": "⚓ COLOMBO", "text": "«Con le mie gesta ho apportato alla Spagna ricchezze, fede e un nuovo mondo da conquistare!»"}], "svg": "<svg width=\"110\" height=\"150\" viewBox=\"0 0 110 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- red cape flowing -->\n      <path d=\"M14 150 Q18 102 55 94 Q92 102 96 150Z\" fill=\"#c0392b\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <!-- cape fold -->\n      <path d=\"M14 150 Q24 120 30 100\" stroke=\"#922b21\" stroke-width=\"2\" fill=\"none\"/>\n      <!-- tunic underneath -->\n      <path d=\"M34 106 Q55 98 76 106 L72 130 H38Z\" fill=\"#d4a040\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- belt -->\n      <rect x=\"32\" y=\"118\" width=\"46\" height=\"7\" rx=\"3\" fill=\"#6a3a10\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <!-- head round, proud tilt -->\n      <ellipse cx=\"57\" cy=\"52\" rx=\"22\" ry=\"22\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2.2\" transform=\"rotate(5 57 52)\"/>\n      <!-- dark wavy hair -->\n      <path d=\"M35 48 Q57 24 79 48\" fill=\"#2a1808\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M35 48 Q28 60 30 74\" stroke=\"#2a1808\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M79 48 Q86 60 84 74\" stroke=\"#2a1808\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <!-- proud eyebrows up -->\n      <path d=\"M40 50 Q45 44 50 49\" stroke=\"#2a1808\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M64 49 Q69 44 74 50\" stroke=\"#2a1808\" stroke-width=\"2\" fill=\"none\"/>\n      <!-- eyes bright -->\n      <ellipse cx=\"45\" cy=\"55\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"46\" cy=\"56\" r=\"2.5\" fill=\"#2a1808\"/>\n      <ellipse cx=\"69\" cy=\"55\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"70\" cy=\"56\" r=\"2.5\" fill=\"#2a1808\"/>\n      <!-- light in eyes -->\n      <circle cx=\"47\" cy=\"55\" r=\"1\" fill=\"white\"/>\n      <circle cx=\"71\" cy=\"55\" r=\"1\" fill=\"white\"/>\n      <!-- smile proud -->\n      <path d=\"M46 67 Q57 74 68 67\" stroke=\"#1a1008\" stroke-width=\"1.8\" fill=\"none\"/>\n      <!-- beard -->\n      <path d=\"M38 66 Q57 80 76 66 Q70 82 57 84 Q44 82 38 66Z\" fill=\"#3a2010\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- moustache -->\n      <path d=\"M46 64 Q57 68 68 64\" stroke=\"#2a1808\" stroke-width=\"2.5\" fill=\"none\"/>\n      <!-- arm raised fist chest -->\n      <path d=\"M80 110 Q94 96 96 80\" stroke=\"#f5dcb0\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"96\" cy=\"77\" rx=\"8\" ry=\"9\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- medal on chest -->\n      <circle cx=\"55\" cy=\"108\" r=\"8\" fill=\"#d4a017\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <text x=\"55\" y=\"112\" text-anchor=\"middle\" font-size=\"8\" fill=\"#1a1008\">⚓</text>\n      <!-- blush -->\n      <circle cx=\"36\" cy=\"60\" r=\"6\" fill=\"#ffb0b0\" opacity=\".4\"/>\n      <circle cx=\"78\" cy=\"60\" r=\"6\" fill=\"#ffb0b0\" opacity=\".4\"/>\n    </svg>"}, {"num": 4, "pcap": "⚖️ Le accuse ufficiali", "bubbles": [{"who": "⚖️ GIUDICE", "text": "«Ammiraglio Colombo, voi siete accusato di crudeltà verso gli indigeni delle terre da voi scoperte…»"}, {"who": "⚖️ GIUDICE", "text": "«…di abuso del potere affidatovi dai sovrani e di inganno verso la stessa Corona.»"}, {"who": "⚖️ GIUDICE", "text": "«Che abbiate a difendervi.»"}], "svg": "<svg width=\"110\" height=\"130\" viewBox=\"0 0 110 130\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- robe -->\n      <path d=\"M18 130 Q22 92 55 86 Q88 92 92 130Z\" fill=\"#2a2860\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M36 88 Q55 82 74 88 L70 102 H40Z\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <ellipse cx=\"55\" cy=\"50\" rx=\"22\" ry=\"22\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M33 46 Q44 22 55 20 Q66 22 77 46\" fill=\"#e0ddd0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M33 46 Q26 62 30 78\" stroke=\"#e0ddd0\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M77 46 Q84 62 80 78\" stroke=\"#e0ddd0\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M39 46 Q44 41 49 45\" stroke=\"#3a2010\" stroke-width=\"2.5\" fill=\"none\"/>\n      <path d=\"M61 45 Q66 41 71 46\" stroke=\"#3a2010\" stroke-width=\"2.5\" fill=\"none\"/>\n      <ellipse cx=\"44\" cy=\"51\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"44\" cy=\"52\" r=\"2.5\" fill=\"#1a1008\"/>\n      <ellipse cx=\"66\" cy=\"51\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"66\" cy=\"52\" r=\"2.5\" fill=\"#1a1008\"/>\n      <path d=\"M44 66 Q55 63 66 66\" stroke=\"#1a1008\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- scroll -->\n      <rect x=\"18\" y=\"90\" width=\"32\" height=\"26\" rx=\"2\" fill=\"#fdf3d0\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <line x1=\"22\" y1=\"97\" x2=\"46\" y2=\"97\" stroke=\"#c0392b\" stroke-width=\"1\"/>\n      <line x1=\"22\" y1=\"103\" x2=\"46\" y2=\"103\" stroke=\"#8b5e2a\" stroke-width=\".8\"/>\n      <line x1=\"22\" y1=\"109\" x2=\"40\" y2=\"109\" stroke=\"#8b5e2a\" stroke-width=\".8\"/>\n      <path d=\"M46 86 Q42 76 48 72 Q44 80 50 86Z\" fill=\"#1a1008\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n    </svg>"}, {"num": 5, "pcap": "⚓ Colombo si difende (1ª risposta)", "bubbles": [{"who": "⚓ COLOMBO", "text": "«Io, Cristoforo Colombo, navigatore di Genova, ho solcato per tutta la vita mari e oceani sconosciuti per amor di scienza e per fede.»"}, {"who": "⚓ COLOMBO", "text": "«Ho portato alla cristianità nuove terre, nuove anime e ricchezze per la Spagna. Ho obbedito agli ordini dei miei sovrani e servito Dio.»"}], "svg": "<svg width=\"110\" height=\"130\" viewBox=\"0 0 110 130\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- same colombo but expression more defensive -->\n      <path d=\"M14 130 Q18 92 55 86 Q92 92 96 130Z\" fill=\"#c0392b\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M34 98 Q55 90 76 98 L72 114 H38Z\" fill=\"#d4a040\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <ellipse cx=\"55\" cy=\"50\" rx=\"22\" ry=\"22\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M33 46 Q55 22 77 46\" fill=\"#2a1808\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M33 46 Q26 60 28 74\" stroke=\"#2a1808\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M77 46 Q84 60 82 74\" stroke=\"#2a1808\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <!-- defensive brows -->\n      <path d=\"M38 48 Q44 43 50 47\" stroke=\"#2a1808\" stroke-width=\"2.2\" fill=\"none\"/>\n      <path d=\"M60 47 Q66 43 72 48\" stroke=\"#2a1808\" stroke-width=\"2.2\" fill=\"none\"/>\n      <ellipse cx=\"44\" cy=\"53\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"44\" cy=\"54\" r=\"2.5\" fill=\"#2a1808\"/>\n      <ellipse cx=\"66\" cy=\"53\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"66\" cy=\"54\" r=\"2.5\" fill=\"#2a1808\"/>\n      <!-- determined mouth -->\n      <path d=\"M45 65 Q57 69 69 65\" stroke=\"#1a1008\" stroke-width=\"1.8\" fill=\"none\"/>\n      <path d=\"M38 64 Q57 78 76 64 Q70 80 57 82 Q44 80 38 64Z\" fill=\"#3a2010\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- hand on chest -->\n      <path d=\"M24 108 Q14 96 18 84\" stroke=\"#f5dcb0\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"18\" cy=\"81\" rx=\"8\" ry=\"9\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n    </svg>"}, {"num": 6, "pcap": "👑 Regina Isabella di Castiglia", "bubbles": [{"who": "👑 REGINA ISABELLA", "text": "«Sappiate, Ammiraglio, che la Corona non dimentica il vostro coraggio.»"}, {"who": "👑 REGINA ISABELLA", "text": "«Ma giungono notizie oscure dalle Indie: popoli sottomessi, città distrutte, uomini e donne incatenati, torturati e uccisi.»"}, {"who": "👑 REGINA ISABELLA", "text": "«La gloria delle ricchezze non giustifica il sangue versato.»"}, {"who": "", "text": "L'aula si riempie di tensione. Il cronista annota."}, {"who": "", "text": "«L'aula si riempie di voci. Chi parlerà a favore? Chi contro? Il destino di Colombo è nelle mani della storia.»"}], "svg": "<svg width=\"130\" height=\"160\" viewBox=\"0 0 130 160\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- throne back -->\n      <rect x=\"40\" y=\"20\" width=\"50\" height=\"120\" rx=\"6\" fill=\"#8b5e2a\" stroke=\"#1a1008\" stroke-width=\"1.8\"/>\n      <path d=\"M40 20 Q65 10 90 20\" fill=\"#d4a017\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <!-- armrests -->\n      <rect x=\"28\" y=\"90\" width=\"20\" height=\"8\" rx=\"4\" fill=\"#7a4f1e\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <rect x=\"82\" y=\"90\" width=\"20\" height=\"8\" rx=\"4\" fill=\"#7a4f1e\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <!-- dress flowing purple -->\n      <path d=\"M26 160 Q30 112 65 106 Q100 112 104 160Z\" fill=\"#6b1a6b\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <!-- bodice detail -->\n      <path d=\"M42 114 Q65 106 88 114 L84 130 H46Z\" fill=\"#8b2a8b\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- sleeve left -->\n      <path d=\"M26 130 Q16 118 18 104\" stroke=\"#6b1a6b\" stroke-width=\"14\" stroke-linecap=\"round\"/>\n      <path d=\"M18 102 Q12 96 14 88\" stroke=\"#f5dcb0\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <!-- sleeve right -->\n      <path d=\"M104 130 Q114 118 112 104\" stroke=\"#6b1a6b\" stroke-width=\"14\" stroke-linecap=\"round\"/>\n      <path d=\"M112 102 Q118 96 116 88\" stroke=\"#f5dcb0\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <!-- head -->\n      <ellipse cx=\"65\" cy=\"56\" rx=\"23\" ry=\"24\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2.2\"/>\n      <!-- crown -->\n      <path d=\"M42 48 L46 30 L54 44 L65 28 L76 44 L84 30 L88 48Z\" fill=\"#d4a017\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <rect x=\"42\" y=\"46\" width=\"46\" height=\"10\" rx=\"3\" fill=\"#b8860b\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <!-- jewels on crown -->\n      <circle cx=\"55\" cy=\"51\" r=\"3\" fill=\"#c0392b\"/>\n      <circle cx=\"65\" cy=\"51\" r=\"3\" fill=\"#2980b9\"/>\n      <circle cx=\"75\" cy=\"51\" r=\"3\" fill=\"#27ae60\"/>\n      <!-- veil lace -->\n      <path d=\"M42 62 Q36 78 38 96\" stroke=\"#e8d5a3\" stroke-width=\"5\" stroke-linecap=\"round\" opacity=\".8\"/>\n      <path d=\"M88 62 Q94 78 92 96\" stroke=\"#e8d5a3\" stroke-width=\"5\" stroke-linecap=\"round\" opacity=\".8\"/>\n      <!-- eyes, slightly stern -->\n      <ellipse cx=\"57\" cy=\"58\" rx=\"4.5\" ry=\"5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"58\" cy=\"59\" r=\"2.5\" fill=\"#2a1808\"/>\n      <ellipse cx=\"73\" cy=\"58\" rx=\"4.5\" ry=\"5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"74\" cy=\"59\" r=\"2.5\" fill=\"#2a1808\"/>\n      <!-- elegant eyebrows -->\n      <path d=\"M53 52 Q57 48 61 52\" stroke=\"#3a2010\" stroke-width=\"1.8\" fill=\"none\"/>\n      <path d=\"M69 52 Q73 48 77 52\" stroke=\"#3a2010\" stroke-width=\"1.8\" fill=\"none\"/>\n      <!-- mouth thin elegant -->\n      <path d=\"M57 70 Q65 74 73 70\" stroke=\"#1a1008\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- pearl necklace -->\n      <path d=\"M48 86 Q65 92 82 86\" stroke=\"none\" fill=\"none\"/>\n      <circle cx=\"52\" cy=\"88\" r=\"3\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <circle cx=\"59\" cy=\"90\" r=\"3\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <circle cx=\"65\" cy=\"91\" r=\"3\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <circle cx=\"71\" cy=\"90\" r=\"3\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <circle cx=\"78\" cy=\"88\" r=\"3\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <!-- blush -->\n      <circle cx=\"44\" cy=\"64\" r=\"7\" fill=\"#ffb0b0\" opacity=\".4\"/>\n      <circle cx=\"86\" cy=\"64\" r=\"7\" fill=\"#ffb0b0\" opacity=\".4\"/>\n    </svg>"}, {"num": 7, "pcap": "⚓ Il Giudice chiama il marinaio", "bubbles": [{"who": "⚖️ GIUDICE", "text": "«Si presenti il primo testimone: uno dei marinai che prese parte alla spedizione del 1492.»"}], "svg": "<svg width=\"110\" height=\"120\" viewBox=\"0 0 110 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M18 120 Q22 86 55 80 Q88 86 92 120Z\" fill=\"#2a2860\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M34 82 Q55 76 76 82 L72 96 H38Z\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <ellipse cx=\"55\" cy=\"48\" rx=\"22\" ry=\"22\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M33 44 Q44 20 55 18 Q66 20 77 44\" fill=\"#e0ddd0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M33 44 Q26 60 30 76\" stroke=\"#e0ddd0\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M77 44 Q84 60 80 76\" stroke=\"#e0ddd0\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M39 44 Q44 39 49 43\" stroke=\"#3a2010\" stroke-width=\"2.2\" fill=\"none\"/>\n      <path d=\"M61 43 Q66 39 71 44\" stroke=\"#3a2010\" stroke-width=\"2.2\" fill=\"none\"/>\n      <ellipse cx=\"44\" cy=\"49\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"44\" cy=\"50\" r=\"2.5\" fill=\"#1a1008\"/>\n      <ellipse cx=\"66\" cy=\"49\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"66\" cy=\"50\" r=\"2.5\" fill=\"#1a1008\"/>\n      <path d=\"M44 62 Q55 59 66 62\" stroke=\"#1a1008\" stroke-width=\"1.5\" fill=\"none\"/>\n    </svg>"}, {"num": 8, "pcap": "🌊 Il Marinaio Paolo – Testimonianza", "bubbles": [{"who": "🌊 MARINAIO PAOLO", "text": "«Il mio nome è Paolo. Ero sulla Santa Maria. Partimmo da Palos il 3 agosto 1492, pieni di speranza e di orgoglio.»"}, {"who": "🌊 MARINAIO PAOLO", "text": "«Ben presto, trovandoci in mare aperto senza avvistare mai terraferma, la paura iniziò ad assalirci.»"}, {"who": "🌊 MARINAIO PAOLO", "text": "«Dopo settimane di tempeste, nel 12 ottobre 1492 avvistammo finalmente la terraferma.»"}, {"who": "🌊 MARINAIO PAOLO", "text": "«Ci trovammo di fronte un popolo mai visto: gente nuda, con armi rudimentali e una lingua a noi sconosciuta. Eppure si dimostrarono gentili e accoglienti, offrendoci cibo e oro.»"}, {"who": "🌊 MARINAIO PAOLO", "text": "«Le cose però presto cambiarono. Ci dissero di prendere oro, di usare la forza se necessario. Chi poteva disobbedire?»"}, {"who": "🌊 MARINAIO PAOLO", "text": "«Il Capitano chiese tributi, punì chi non li portava. Le mani di chi rifiutava venivano mozzate. Io stesso vidi piangere uomini, donne e bambini.»"}, {"who": "🌊 MARINAIO PAOLO", "text": "«La Spagna voleva ricchezze, e le coste si tinsero di sangue.»"}], "svg": "<svg width=\"130\" height=\"160\" viewBox=\"0 0 130 160\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- body sailor tunic striped -->\n      <path d=\"M18 160 Q22 112 65 104 Q108 112 112 160Z\" fill=\"#3a5a8a\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <!-- stripes on chest -->\n      <path d=\"M34 118 Q65 108 96 118\" stroke=\"#5a7aaa\" stroke-width=\"3\" fill=\"none\"/>\n      <path d=\"M32 126 Q65 116 98 126\" stroke=\"#5a7aaa\" stroke-width=\"3\" fill=\"none\"/>\n      <!-- rope belt -->\n      <rect x=\"28\" y=\"132\" width=\"74\" height=\"8\" rx=\"4\" fill=\"#8b6914\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <!-- head tanned, nervous -->\n      <ellipse cx=\"65\" cy=\"54\" rx=\"24\" ry=\"24\" fill=\"#d4956a\" stroke=\"#1a1008\" stroke-width=\"2.2\"/>\n      <!-- red bandana hand-drawn -->\n      <path d=\"M41 46 Q65 34 89 46 L87 54 Q65 44 43 54Z\" fill=\"#c0392b\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- nervous eyebrows -->\n      <path d=\"M46 50 Q51 44 56 49\" stroke=\"#3a1a08\" stroke-width=\"2.5\" fill=\"none\"/>\n      <path d=\"M74 49 Q79 44 84 50\" stroke=\"#3a1a08\" stroke-width=\"2.5\" fill=\"none\"/>\n      <!-- worried eyes wide -->\n      <ellipse cx=\"51\" cy=\"56\" rx=\"5\" ry=\"5.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"52\" cy=\"57\" r=\"3\" fill=\"#2a1808\"/>\n      <circle cx=\"53\" cy=\"56\" r=\"1\" fill=\"white\"/>\n      <ellipse cx=\"79\" cy=\"56\" rx=\"5\" ry=\"5.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"80\" cy=\"57\" r=\"3\" fill=\"#2a1808\"/>\n      <circle cx=\"81\" cy=\"56\" r=\"1\" fill=\"white\"/>\n      <!-- sweat drop -->\n      <ellipse cx=\"89\" cy=\"48\" rx=\"3\" ry=\"5\" fill=\"#8ab0d4\" opacity=\".8\"/>\n      <!-- stubble dots -->\n      <circle cx=\"50\" cy=\"70\" r=\"1.2\" fill=\"#5a3a1a\"/>\n      <circle cx=\"57\" cy=\"73\" r=\"1.2\" fill=\"#5a3a1a\"/>\n      <circle cx=\"65\" cy=\"74\" r=\"1.2\" fill=\"#5a3a1a\"/>\n      <circle cx=\"73\" cy=\"73\" r=\"1.2\" fill=\"#5a3a1a\"/>\n      <circle cx=\"80\" cy=\"70\" r=\"1.2\" fill=\"#5a3a1a\"/>\n      <!-- open mouth nervous -->\n      <path d=\"M53 67 Q65 73 77 67 Q71 76 65 77 Q59 76 53 67Z\" fill=\"#c06050\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <!-- hand on witness box -->\n      <path d=\"M18 140 Q8 126 12 112\" stroke=\"#d4956a\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"12\" cy=\"109\" rx=\"8\" ry=\"9\" fill=\"#d4956a\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- blush flustered -->\n      <circle cx=\"40\" cy=\"62\" r=\"8\" fill=\"#ff9090\" opacity=\".45\"/>\n      <circle cx=\"90\" cy=\"62\" r=\"8\" fill=\"#ff9090\" opacity=\".45\"/>\n    </svg>"}, {"num": 9, "pcap": "⚖️ Il Giudice annota", "bubbles": [{"who": "⚖️ GIUDICE", "text": "«Queste sono senz'altro parole gravi, tanto più se dette da un marinaio come voi.»"}, {"who": "⚖️ GIUDICE", "text": "«Si parla di schiavitù, violenze, sfruttamento. Accuse che vanno contro il volere di Dio.»"}, {"who": "⚖️ GIUDICE", "text": "«Si chiami ora il secondo testimone: un indigeno delle isole Antille.»"}], "svg": "<svg width=\"100\" height=\"120\" viewBox=\"0 0 100 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M16 120 Q20 86 50 80 Q80 86 84 120Z\" fill=\"#2a2860\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M30 82 Q50 76 70 82 L66 96 H34Z\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <ellipse cx=\"50\" cy=\"46\" rx=\"20\" ry=\"21\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M30 42 Q40 20 50 18 Q60 20 70 42\" fill=\"#e0ddd0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M30 42 Q24 58 28 72\" stroke=\"#e0ddd0\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n      <path d=\"M70 42 Q76 58 72 72\" stroke=\"#e0ddd0\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n      <path d=\"M36 42 Q40 37 44 41\" stroke=\"#3a2010\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M56 41 Q60 37 64 42\" stroke=\"#3a2010\" stroke-width=\"2\" fill=\"none\"/>\n      <ellipse cx=\"40\" cy=\"47\" rx=\"3.5\" ry=\"4\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"40\" cy=\"48\" r=\"2\" fill=\"#1a1008\"/>\n      <ellipse cx=\"60\" cy=\"47\" rx=\"3.5\" ry=\"4\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"60\" cy=\"48\" r=\"2\" fill=\"#1a1008\"/>\n      <path d=\"M40 59 Q50 56 60 59\" stroke=\"#1a1008\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- scroll + quill -->\n      <rect x=\"56\" y=\"82\" width=\"30\" height=\"28\" rx=\"2\" fill=\"#fdf3d0\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <line x1=\"60\" y1=\"90\" x2=\"82\" y2=\"90\" stroke=\"#c0392b\" stroke-width=\"1\"/>\n      <line x1=\"60\" y1=\"96\" x2=\"82\" y2=\"96\" stroke=\"#8b5e2a\" stroke-width=\".8\"/>\n      <line x1=\"60\" y1=\"102\" x2=\"76\" y2=\"102\" stroke=\"#8b5e2a\" stroke-width=\".8\"/>\n      <path d=\"M52 80 Q48 70 54 66 Q50 74 56 80Z\" fill=\"#1a1008\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n    </svg>"}, {"num": 10, "pcap": "🌿 Indigeno Taino – Garocuya", "bubbles": [{"who": "🌿 GAROCUYA (Taino)", "text": "«Il mio nome è Garocuya. La nostra vita, prima dell'arrivo delle vostre navi, era costruita sulla pace tra i popoli.»"}, {"who": "🌿 GAROCUYA", "text": "«Le nostre giornate erano scandite dal lavoro: cacciavamo, coltivavamo il terreno e pregavamo i nostri dèi.»"}, {"who": "🌿 GAROCUYA", "text": "«Un giorno arrivarono gli uomini bianchi con le grandi navi. Con croci e spade. Con le stesse armi presero le nostre terre e imposero le loro leggi.»"}, {"who": "🌿 GAROCUYA", "text": "«Molti dei miei fratelli furono mandati a morire nelle miniere d'oro. Molte delle nostre donne sono state violentate e trattate come schiave.»"}, {"who": "🌿 GAROCUYA", "text": "«Dal loro arrivo il nostro popolo si sta spegnendo come fuoco nella pioggia.»"}], "svg": "<svg width=\"130\" height=\"160\" viewBox=\"0 0 130 160\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- body wrap cloth orange-brown -->\n      <path d=\"M18 160 Q22 112 65 104 Q108 112 112 160Z\" fill=\"#c87830\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <!-- decorative patterns on wrap -->\n      <path d=\"M26 130 Q40 122 54 130\" stroke=\"#8b1a1a\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M76 128 Q90 120 104 128\" stroke=\"#8b1a1a\" stroke-width=\"2\" fill=\"none\"/>\n      <!-- geometric tattoo on arm -->\n      <path d=\"M22 140 Q18 130 22 118\" stroke=\"#5a2a08\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <path d=\"M20 134 Q14 130 20 126\" stroke=\"#3a1a08\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- head round, darker skin -->\n      <ellipse cx=\"65\" cy=\"52\" rx=\"24\" ry=\"25\" fill=\"#c87830\" stroke=\"#1a1008\" stroke-width=\"2.2\"/>\n      <!-- black long straight hair -->\n      <path d=\"M41 48 Q65 26 89 48\" fill=\"#1a0a00\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M41 48 Q33 66 35 88\" stroke=\"#1a0a00\" stroke-width=\"7\" stroke-linecap=\"round\"/>\n      <path d=\"M89 48 Q97 66 95 88\" stroke=\"#1a0a00\" stroke-width=\"7\" stroke-linecap=\"round\"/>\n      <!-- feather in hair red -->\n      <path d=\"M85 42 Q98 20 92 34 Q104 16 97 32 Q102 20 100 36Z\" fill=\"#e84020\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <path d=\"M87 40 Q92 36 94 32\" stroke=\"#f8c050\" stroke-width=\"1\" fill=\"none\"/>\n      <!-- sad eyes with tears -->\n      <ellipse cx=\"56\" cy=\"55\" rx=\"5\" ry=\"5.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"57\" cy=\"56\" r=\"3\" fill=\"#2a1808\"/>\n      <circle cx=\"58\" cy=\"55\" r=\"1\" fill=\"white\"/>\n      <ellipse cx=\"74\" cy=\"55\" rx=\"5\" ry=\"5.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"75\" cy=\"56\" r=\"3\" fill=\"#2a1808\"/>\n      <circle cx=\"76\" cy=\"55\" r=\"1\" fill=\"white\"/>\n      <!-- tears -->\n      <path d=\"M53 62 Q50 68 52 74\" stroke=\"#6ab0d4\" stroke-width=\"2.5\" stroke-linecap=\"round\" fill=\"none\"/>\n      <ellipse cx=\"52\" cy=\"75\" rx=\"2\" ry=\"3\" fill=\"#6ab0d4\" opacity=\".8\"/>\n      <!-- sorrowful brows down -->\n      <path d=\"M50 48 Q56 44 62 48\" stroke=\"#3a1a08\" stroke-width=\"2.2\" fill=\"none\"/>\n      <path d=\"M68 48 Q74 44 80 48\" stroke=\"#3a1a08\" stroke-width=\"2.2\" fill=\"none\"/>\n      <!-- open mouth speaking -->\n      <path d=\"M56 70 Q65 76 74 70 Q70 80 65 82 Q60 80 56 70Z\" fill=\"#8b3010\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <!-- hand raised pleading -->\n      <path d=\"M108 128 Q118 112 118 96\" stroke=\"#c87830\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"118\" cy=\"93\" rx=\"9\" ry=\"10\" fill=\"#c87830\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n    </svg>"}, {"num": 11, "pcap": "⚓ Colombo si difende – 2ª risposta", "bubbles": [{"who": "⚓ COLOMBO", "text": "«Mi si accusa oggi di crudeltà, ma io non sono un mostro!»"}, {"who": "⚓ COLOMBO", "text": "«Ho agito per fede e per gloria della Spagna e della corona. Ho compiuto l'impresa che nessuno aveva osato fare.»"}, {"who": "⚓ COLOMBO", "text": "«Ho voluto portare la vera fede a genti prive della conoscenza di Dio. Ho voluto portar loro il dono della civiltà.»"}, {"who": "⚓ COLOMBO", "text": "«Se vi furono eccessi, non furono certo miei, ma dei coloni avidi di ricchezze.»"}, {"who": "⚓ COLOMBO", "text": "«Non si giudichi con gli occhi di oggi ciò che allora era missione e fede!»"}], "svg": "<svg width=\"115\" height=\"150\" viewBox=\"0 0 115 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M14 150 Q18 104 57 96 Q96 104 100 150Z\" fill=\"#c0392b\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M34 108 Q57 100 80 108 L76 122 H38Z\" fill=\"#d4a040\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <rect x=\"30\" y=\"122\" width=\"54\" height=\"7\" rx=\"3\" fill=\"#6a3a10\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <ellipse cx=\"57\" cy=\"52\" rx=\"23\" ry=\"23\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2.2\"/>\n      <path d=\"M34 48 Q57 24 80 48\" fill=\"#2a1808\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M34 48 Q27 62 30 76\" stroke=\"#2a1808\" stroke-width=\"7\" stroke-linecap=\"round\"/>\n      <path d=\"M80 48 Q87 62 84 76\" stroke=\"#2a1808\" stroke-width=\"7\" stroke-linecap=\"round\"/>\n      <!-- upset brows -->\n      <path d=\"M39 50 Q45 44 51 49\" stroke=\"#2a1808\" stroke-width=\"2.5\" fill=\"none\"/>\n      <path d=\"M63 49 Q69 44 75 50\" stroke=\"#2a1808\" stroke-width=\"2.5\" fill=\"none\"/>\n      <ellipse cx=\"45\" cy=\"56\" rx=\"4.5\" ry=\"5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"46\" cy=\"57\" r=\"2.8\" fill=\"#2a1808\"/>\n      <ellipse cx=\"69\" cy=\"56\" rx=\"4.5\" ry=\"5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"70\" cy=\"57\" r=\"2.8\" fill=\"#2a1808\"/>\n      <!-- firm mouth -->\n      <path d=\"M47 67 Q57 71 67 67\" stroke=\"#1a1008\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M38 66 Q57 80 76 66 Q70 82 57 84 Q44 82 38 66Z\" fill=\"#3a2010\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- arms open defensive -->\n      <path d=\"M100 118 Q114 102 116 86\" stroke=\"#f5dcb0\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <path d=\"M14 118 Q0 102 -2 86\" stroke=\"#f5dcb0\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n    </svg>"}, {"num": 12, "pcap": "✝️ Frate Bartolomeo de las Casas", "bubbles": [{"who": "✝️ FRA' BARTOLOMEO", "text": "«Un dono? Semmai uno sterminio!»"}, {"who": "✝️ FRA' BARTOLOMEO", "text": "«Ammiraglio, io vi credo uomo di fede. Ma ciò a cui ho assistito non ha alcun ideale di fede.»"}, {"who": "✝️ FRA' BARTOLOMEO", "text": "«Ho visto con i miei occhi le persone ferite, i villaggi incendiati, gli schiavi incatenati, le donne violentate e i bambini uccisi.»"}, {"who": "✝️ FRA' BARTOLOMEO", "text": "«Non si converte un popolo con la spada. La fede si offre, non si impone.»"}], "svg": "<svg width=\"115\" height=\"155\" viewBox=\"0 0 115 155\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- habit brown hood and robe -->\n      <path d=\"M14 155 Q18 108 57 100 Q96 108 100 155Z\" fill=\"#6b4a1a\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <!-- hood over head -->\n      <path d=\"M34 88 Q57 74 80 88\" fill=\"#5a3a10\" stroke=\"#1a1008\" stroke-width=\"1.8\"/>\n      <!-- rope cord belt -->\n      <rect x=\"28\" y=\"128\" width=\"58\" height=\"7\" rx=\"3\" fill=\"#8b6914\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <!-- cross dangling -->\n      <rect x=\"52\" y=\"132\" width=\"5\" height=\"18\" rx=\"1\" fill=\"#5a3a10\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <rect x=\"47\" y=\"138\" width=\"15\" height=\"4\" rx=\"1\" fill=\"#5a3a10\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <!-- head round, older face -->\n      <ellipse cx=\"57\" cy=\"54\" rx=\"22\" ry=\"23\" fill=\"#d4b07a\" stroke=\"#1a1008\" stroke-width=\"2.2\"/>\n      <!-- bald on top, fringe -->\n      <path d=\"M35 50 Q57 38 79 50\" fill=\"#6b4a1a\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M35 50 Q34 44 36 38 Q47 42 57 40 Q67 42 78 38 Q80 44 79 50\" fill=\"#d4b07a\" stroke=\"none\"/>\n      <!-- wrinkles on forehead -->\n      <path d=\"M44 50 Q50 47 56 50\" stroke=\"#a07840\" stroke-width=\"1\" fill=\"none\"/>\n      <path d=\"M58 50 Q64 47 70 50\" stroke=\"#a07840\" stroke-width=\"1\" fill=\"none\"/>\n      <!-- stern angry brows -->\n      <path d=\"M40 52 Q46 46 52 51\" stroke=\"#3a1a08\" stroke-width=\"2.8\" fill=\"none\"/>\n      <path d=\"M62 51 Q68 46 74 52\" stroke=\"#3a1a08\" stroke-width=\"2.8\" fill=\"none\"/>\n      <!-- piercing eyes -->\n      <ellipse cx=\"46\" cy=\"57\" rx=\"4.5\" ry=\"5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"47\" cy=\"58\" r=\"2.8\" fill=\"#1a1008\"/>\n      <ellipse cx=\"68\" cy=\"57\" rx=\"4.5\" ry=\"5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"69\" cy=\"58\" r=\"2.8\" fill=\"#1a1008\"/>\n      <!-- firm tight mouth -->\n      <path d=\"M46 70 Q57 67 68 70\" stroke=\"#1a1008\" stroke-width=\"2\" fill=\"none\"/>\n      <!-- pointing finger accusatory -->\n      <path d=\"M14 118 Q4 104 6 88\" stroke=\"#d4b07a\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"6\" cy=\"85\" rx=\"8\" ry=\"9\" fill=\"#d4b07a\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M2 85 L-4 78\" stroke=\"#d4b07a\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n    </svg>"}, {"num": 13, "pcap": "👑 La Regina difende Colombo", "bubbles": [{"who": "👑 REGINA ISABELLA", "text": "«È vero. L'Ammiraglio Colombo ha servito la corona. Senza di lui, la Spagna non sarebbe oggi la regina dei mari.»"}, {"who": "👑 REGINA ISABELLA", "text": "«La nostra intenzione era diffondere la fede cristiana, portare civiltà. Non possiamo dimenticare i meriti della scoperta.»"}], "svg": "<svg width=\"110\" height=\"140\" viewBox=\"0 0 110 140\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M16 140 Q20 100 55 92 Q90 100 94 140Z\" fill=\"#6b1a6b\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M32 100 Q55 92 78 100 L74 116 H36Z\" fill=\"#8b2a8b\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <ellipse cx=\"55\" cy=\"52\" rx=\"22\" ry=\"23\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M33 44 L37 28 L45 40 L55 24 L65 40 L73 28 L77 44Z\" fill=\"#d4a017\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <rect x=\"33\" y=\"42\" width=\"44\" height=\"9\" rx=\"3\" fill=\"#b8860b\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"46\" cy=\"47\" r=\"3\" fill=\"#c0392b\"/>\n      <circle cx=\"55\" cy=\"47\" r=\"3\" fill=\"#2980b9\"/>\n      <circle cx=\"64\" cy=\"47\" r=\"3\" fill=\"#27ae60\"/>\n      <path d=\"M33 58 Q27 72 29 88\" stroke=\"#e8d5a3\" stroke-width=\"4\" stroke-linecap=\"round\" opacity=\".8\"/>\n      <path d=\"M77 58 Q83 72 81 88\" stroke=\"#e8d5a3\" stroke-width=\"4\" stroke-linecap=\"round\" opacity=\".8\"/>\n      <path d=\"M42 50 Q46 45 50 49\" stroke=\"#3a2010\" stroke-width=\"1.8\" fill=\"none\"/>\n      <path d=\"M60 49 Q64 45 68 50\" stroke=\"#3a2010\" stroke-width=\"1.8\" fill=\"none\"/>\n      <ellipse cx=\"46\" cy=\"55\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"47\" cy=\"56\" r=\"2.5\" fill=\"#2a1808\"/>\n      <ellipse cx=\"64\" cy=\"55\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"65\" cy=\"56\" r=\"2.5\" fill=\"#2a1808\"/>\n      <path d=\"M47 67 Q55 71 63 67\" stroke=\"#1a1008\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- pearl necklace -->\n      <circle cx=\"44\" cy=\"76\" r=\"3\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <circle cx=\"51\" cy=\"78\" r=\"3\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <circle cx=\"59\" cy=\"78\" r=\"3\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <circle cx=\"66\" cy=\"76\" r=\"3\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <circle cx=\"35\" cy=\"66\" r=\"7\" fill=\"#ffb0b0\" opacity=\".4\"/>\n      <circle cx=\"75\" cy=\"66\" r=\"7\" fill=\"#ffb0b0\" opacity=\".4\"/>\n    </svg>"}, {"num": 14, "pcap": "💰 Il Mercante Europeo", "bubbles": [{"who": "💰 MERCANTE", "text": "«Grazie a quelle navi il mondo è completamente cambiato!»"}, {"who": "💰 MERCANTE", "text": "«Oro, spezie, nuove merci mai viste prima… Mercati infiniti si sono aperti.»"}, {"who": "💰 MERCANTE", "text": "«È stato senz'altro un dono al progresso dell'Europa!»"}], "svg": "<svg width=\"110\" height=\"145\" viewBox=\"0 0 110 145\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- body wide and round, fur coat -->\n      <path d=\"M10 145 Q14 98 55 90 Q96 98 100 145Z\" fill=\"#5a4a1a\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <!-- fur collar -->\n      <path d=\"M20 100 Q55 88 90 100\" stroke=\"#9a9080\" stroke-width=\"10\" stroke-linecap=\"round\"/>\n      <!-- buttons down -->\n      <circle cx=\"55\" cy=\"112\" r=\"4\" fill=\"#8b6914\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <circle cx=\"55\" cy=\"124\" r=\"4\" fill=\"#8b6914\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <circle cx=\"55\" cy=\"136\" r=\"4\" fill=\"#8b6914\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <!-- head chubby round -->\n      <ellipse cx=\"55\" cy=\"52\" rx=\"26\" ry=\"25\" fill=\"#e8c880\" stroke=\"#1a1008\" stroke-width=\"2.2\"/>\n      <!-- merchant hat -->\n      <ellipse cx=\"55\" cy=\"30\" rx=\"30\" ry=\"10\" fill=\"#3a2810\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <rect x=\"34\" y=\"18\" width=\"42\" height=\"16\" rx=\"2\" fill=\"#3a2810\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M34 30 Q55 26 76 30\" stroke=\"#8b6914\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- chubby happy face -->\n      <path d=\"M38 50 Q43 45 48 50\" stroke=\"#2a1808\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M62 50 Q67 45 72 50\" stroke=\"#2a1808\" stroke-width=\"2\" fill=\"none\"/>\n      <ellipse cx=\"43\" cy=\"56\" rx=\"4.5\" ry=\"5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"44\" cy=\"57\" r=\"2.8\" fill=\"#2a1808\"/>\n      <ellipse cx=\"67\" cy=\"56\" rx=\"4.5\" ry=\"5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"68\" cy=\"57\" r=\"2.8\" fill=\"#2a1808\"/>\n      <!-- big smile -->\n      <path d=\"M42 70 Q55 80 68 70\" stroke=\"#1a1008\" stroke-width=\"2.5\" fill=\"none\"/>\n      <!-- chubby cheeks -->\n      <circle cx=\"34\" cy=\"62\" r=\"10\" fill=\"#ffb070\" opacity=\".5\"/>\n      <circle cx=\"76\" cy=\"62\" r=\"10\" fill=\"#ffb070\" opacity=\".5\"/>\n      <!-- hand with coins -->\n      <path d=\"M96 118 Q108 102 106 86\" stroke=\"#e8c880\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"106\" cy=\"83\" rx=\"9\" ry=\"10\" fill=\"#e8c880\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- gold coins -->\n      <circle cx=\"100\" cy=\"80\" r=\"5\" fill=\"#d4a017\" stroke=\"#1a1008\"/>\n      <circle cx=\"108\" cy=\"78\" r=\"5\" fill=\"#d4a017\" stroke=\"#1a1008\"/>\n      <circle cx=\"104\" cy=\"72\" r=\"5\" fill=\"#b8860b\" stroke=\"#1a1008\"/>\n    </svg>"}, {"num": 15, "pcap": "⚓ Colombo – risposta finale alla Scena III", "bubbles": [{"who": "⚓ COLOMBO", "text": "«Forse ho peccato di cieca obbedienza, ma il mondo che ho trovato è diverso da ogni possibile sogno.»"}, {"who": "⚓ COLOMBO", "text": "«Ho scoperto terre immense, ma anche la debolezza degli uomini.»"}, {"who": "⚓ COLOMBO", "text": "«Siate giusti nel giudizio, ma non cancellate dalla memoria futura la mia impresa.»"}], "svg": "<svg width=\"110\" height=\"140\" viewBox=\"0 0 110 140\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M14 140 Q18 98 55 90 Q92 98 96 140Z\" fill=\"#922b21\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M32 102 Q55 94 78 102 L74 118 H36Z\" fill=\"#d4a040\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <ellipse cx=\"55\" cy=\"50\" rx=\"22\" ry=\"23\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M33 46 Q55 22 77 46\" fill=\"#2a1808\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M33 46 Q26 60 29 74\" stroke=\"#2a1808\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M77 46 Q84 60 81 74\" stroke=\"#2a1808\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <!-- tired sad brows -->\n      <path d=\"M38 50 Q44 46 50 49\" stroke=\"#2a1808\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M60 49 Q66 46 72 50\" stroke=\"#2a1808\" stroke-width=\"2\" fill=\"none\"/>\n      <ellipse cx=\"44\" cy=\"55\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"44\" cy=\"56\" r=\"2.5\" fill=\"#2a1808\"/>\n      <ellipse cx=\"66\" cy=\"55\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"66\" cy=\"56\" r=\"2.5\" fill=\"#2a1808\"/>\n      <!-- sad mouth -->\n      <path d=\"M46 68 Q55 64 64 68\" stroke=\"#1a1008\" stroke-width=\"1.8\" fill=\"none\"/>\n      <path d=\"M36 68 Q55 80 74 68 Q68 82 55 84 Q42 82 36 68Z\" fill=\"#3a2010\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- hand on forehead tired -->\n      <path d=\"M24 106 Q14 92 16 78\" stroke=\"#f5dcb0\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"17\" cy=\"75\" rx=\"8\" ry=\"9\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n    </svg>"}, {"num": 16, "pcap": "✝️ Frate Bartolomeo – 2ª accusa", "bubbles": [{"who": "✝️ FRA' BARTOLOMEO", "text": "«È da ammettere che i posteri ricorderanno ciò che è accaduto come uno dei più grandi eventi storici.»"}, {"who": "✝️ FRA' BARTOLOMEO", "text": "«Ma vengano a conoscenza delle atrocità commesse, delle usurpazioni, delle violenze: una popolazione semplice e umile che ha solo tentato di difendere la propria terra.»"}, {"who": "✝️ FRA' BARTOLOMEO", "text": "«Ho assistito con dolore a tanta sofferenza. Come uomo di fede mi faccio portavoce di queste ingiustizie. Scriverò tutto ciò che i miei occhi hanno dovuto vedere.»"}, {"who": "✝️ FRA' BARTOLOMEO", "text": "«I posteri giudicheranno: un genocidio.»"}], "svg": "<svg width=\"110\" height=\"140\" viewBox=\"0 0 110 140\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M14 140 Q18 96 55 88 Q92 96 96 140Z\" fill=\"#6b4a1a\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M33 80 Q55 72 77 80\" fill=\"#5a3a10\" stroke=\"#1a1008\" stroke-width=\"1.8\"/>\n      <rect x=\"28\" y=\"120\" width=\"54\" height=\"7\" rx=\"3\" fill=\"#8b6914\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <rect x=\"50\" y=\"126\" width=\"5\" height=\"14\" rx=\"1\" fill=\"#5a3a10\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <rect x=\"45\" y=\"131\" width=\"15\" height=\"4\" rx=\"1\" fill=\"#5a3a10\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <ellipse cx=\"55\" cy=\"50\" rx=\"22\" ry=\"22\" fill=\"#d4b07a\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M33 46 Q55 34 77 46\" fill=\"#6b4a1a\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M38 48 Q44 42 50 47\" stroke=\"#3a1a08\" stroke-width=\"2.8\" fill=\"none\"/>\n      <path d=\"M60 47 Q66 42 72 48\" stroke=\"#3a1a08\" stroke-width=\"2.8\" fill=\"none\"/>\n      <ellipse cx=\"44\" cy=\"53\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"45\" cy=\"54\" r=\"2.5\" fill=\"#1a1008\"/>\n      <ellipse cx=\"66\" cy=\"53\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"67\" cy=\"54\" r=\"2.5\" fill=\"#1a1008\"/>\n      <!-- open mouth passionate -->\n      <path d=\"M47 66 Q55 72 63 66 Q59 74 55 76 Q51 74 47 66Z\" fill=\"#8b3010\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <!-- finger pointing up -->\n      <path d=\"M96 106 Q106 92 104 76\" stroke=\"#d4b07a\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"103\" cy=\"73\" rx=\"8\" ry=\"9\" fill=\"#d4b07a\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M100 68 Q103 60 106 64\" stroke=\"#d4b07a\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n    </svg>"}, {"num": 17, "pcap": "💰 Mercante di Siviglia", "bubbles": [{"who": "💰 MERCANTE DI SIVIGLIA", "text": "«Ammiraglio, le vostre navi hanno aperto la via a commerci infiniti. Zucchero, cacao, oro, tabacco: solo alcuni dei prodotti di cui l'Europa è oggi detentrice.»"}, {"who": "💰 MERCANTE DI SIVIGLIA", "text": "«È grazie alla sua scoperta se oggi viviamo di quelle rotte e di quei prodotti.»"}, {"who": "💰 MERCANTE DI SIVIGLIA", "text": "«Sì, vi è stato dolore, forse troppo, ma il progresso esige sacrifici. Non esistono scoperte senza conquista.»"}], "svg": "<svg width=\"110\" height=\"135\" viewBox=\"0 0 110 135\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M10 135 Q14 92 55 84 Q96 92 100 135Z\" fill=\"#5a4a1a\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M20 95 Q55 83 90 95\" stroke=\"#9a9080\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <circle cx=\"55\" cy=\"108\" r=\"4\" fill=\"#8b6914\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <circle cx=\"55\" cy=\"120\" r=\"4\" fill=\"#8b6914\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <ellipse cx=\"55\" cy=\"48\" rx=\"25\" ry=\"24\" fill=\"#e8c880\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <ellipse cx=\"55\" cy=\"26\" rx=\"29\" ry=\"8\" fill=\"#3a2810\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <rect x=\"36\" y=\"16\" width=\"38\" height=\"14\" rx=\"2\" fill=\"#3a2810\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M38 46 Q43 41 48 46\" stroke=\"#2a1808\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M62 46 Q67 41 72 46\" stroke=\"#2a1808\" stroke-width=\"2\" fill=\"none\"/>\n      <ellipse cx=\"43\" cy=\"52\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"44\" cy=\"53\" r=\"2.8\" fill=\"#2a1808\"/>\n      <ellipse cx=\"67\" cy=\"52\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"68\" cy=\"53\" r=\"2.8\" fill=\"#2a1808\"/>\n      <path d=\"M42 66 Q55 74 68 66\" stroke=\"#1a1008\" stroke-width=\"2.5\" fill=\"none\"/>\n      <circle cx=\"34\" cy=\"58\" r=\"9\" fill=\"#ffb070\" opacity=\".5\"/>\n      <circle cx=\"76\" cy=\"58\" r=\"9\" fill=\"#ffb070\" opacity=\".5\"/>\n      <path d=\"M96 108 Q108 94 106 80\" stroke=\"#e8c880\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <circle cx=\"96\" cy=\"76\" r=\"6\" fill=\"#d4a017\" stroke=\"#1a1008\"/>\n      <circle cx=\"104\" cy=\"72\" r=\"6\" fill=\"#d4a017\" stroke=\"#1a1008\"/>\n      <circle cx=\"100\" cy=\"68\" r=\"5\" fill=\"#b8860b\" stroke=\"#1a1008\"/>\n    </svg>"}, {"num": 18, "pcap": "🌿 Garocuya risponde con rabbia", "bubbles": [{"who": "🌿 GAROCUYA", "text": "«Progresso per voi, distruzione per noi!»"}, {"who": "🌿 GAROCUYA", "text": "«Noi non siamo stati \"scoperti\", noi esistevamo già!»"}, {"who": "🌿 GAROCUYA", "text": "«Ciò che avete fatto è stato cancellare la nostra voce.»"}], "svg": "<svg width=\"115\" height=\"150\" viewBox=\"0 0 115 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M16 150 Q20 104 57 96 Q94 104 98 150Z\" fill=\"#c87830\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M26 120 Q42 112 56 120\" stroke=\"#8b1a1a\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M70 118 Q84 110 98 118\" stroke=\"#8b1a1a\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M20 132 Q12 118 16 104\" stroke=\"#c87830\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <path d=\"M16 102 Q10 94 12 86\" stroke=\"#c87830\" stroke-width=\"8\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"57\" cy=\"50\" rx=\"24\" ry=\"24\" fill=\"#c87830\" stroke=\"#1a1008\" stroke-width=\"2.2\"/>\n      <path d=\"M33 46 Q57 22 81 46\" fill=\"#1a0a00\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M33 46 Q25 62 27 82\" stroke=\"#1a0a00\" stroke-width=\"7\" stroke-linecap=\"round\"/>\n      <path d=\"M81 46 Q89 62 87 82\" stroke=\"#1a0a00\" stroke-width=\"7\" stroke-linecap=\"round\"/>\n      <path d=\"M83 42 Q96 18 90 32 Q102 14 96 30 Q101 18 99 34Z\" fill=\"#e84020\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <!-- angry eyes with v-brows -->\n      <path d=\"M44 48 Q50 42 56 48\" stroke=\"#3a1a08\" stroke-width=\"3\" fill=\"none\"/>\n      <path d=\"M58 48 Q64 42 70 48\" stroke=\"#3a1a08\" stroke-width=\"3\" fill=\"none\"/>\n      <ellipse cx=\"50\" cy=\"54\" rx=\"5\" ry=\"5.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"51\" cy=\"55\" r=\"3\" fill=\"#1a1008\"/>\n      <ellipse cx=\"70\" cy=\"54\" rx=\"5\" ry=\"5.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"71\" cy=\"55\" r=\"3\" fill=\"#1a1008\"/>\n      <!-- angry open mouth -->\n      <path d=\"M49 69 Q57 76 65 69 Q61 78 57 80 Q53 78 49 69Z\" fill=\"#8b3010\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- raised fist -->\n      <path d=\"M98 122 Q110 106 110 88\" stroke=\"#c87830\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <rect x=\"103\" y=\"80\" width=\"14\" height=\"13\" rx=\"5\" fill=\"#c87830\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- anger marks -->\n      <path d=\"M86 38 L90 44\" stroke=\"#c0392b\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n      <path d=\"M92 36 L96 42\" stroke=\"#c0392b\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n    </svg>"}, {"num": 19, "pcap": "🌊 Il Marinaio si interroga", "bubbles": [{"who": "🌊 MARINAIO PAOLO", "text": "«La tua voce oggi suona come la voce di un popolo ferito.»"}, {"who": "🌊 MARINAIO PAOLO", "text": "«Hai ragione… Non era nostro diritto prendere con la forza la terra in cui siete nati, la vostra terra.»"}, {"who": "🌊 MARINAIO PAOLO", "text": "«Forse, e mi rivolgo alla corte intera, ai giudici e agli stessi Sovrani: era davvero necessario?»"}], "svg": "<svg width=\"110\" height=\"140\" viewBox=\"0 0 110 140\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M16 140 Q20 98 55 90 Q90 98 94 140Z\" fill=\"#3a5a8a\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M33 100 Q55 90 77 100\" stroke=\"#5a7aaa\" stroke-width=\"3\" fill=\"none\"/>\n      <path d=\"M31 110 Q55 100 79 110\" stroke=\"#5a7aaa\" stroke-width=\"3\" fill=\"none\"/>\n      <rect x=\"28\" y=\"120\" width=\"54\" height=\"7\" rx=\"3\" fill=\"#8b6914\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <ellipse cx=\"55\" cy=\"52\" rx=\"22\" ry=\"22\" fill=\"#d4956a\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M33 46 Q55 34 77 46 L75 52 Q55 44 35 52Z\" fill=\"#c0392b\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- sad brows down -->\n      <path d=\"M38 52 Q44 47 50 51\" stroke=\"#3a1a08\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M60 51 Q66 47 72 52\" stroke=\"#3a1a08\" stroke-width=\"2\" fill=\"none\"/>\n      <ellipse cx=\"44\" cy=\"57\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"44\" cy=\"58\" r=\"2.5\" fill=\"#2a1808\"/>\n      <ellipse cx=\"66\" cy=\"57\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"66\" cy=\"58\" r=\"2.5\" fill=\"#2a1808\"/>\n      <!-- sad mouth -->\n      <path d=\"M46 70 Q55 66 64 70\" stroke=\"#1a1008\" stroke-width=\"1.8\" fill=\"none\"/>\n      <!-- hand on chest -->\n      <path d=\"M20 120 Q10 106 12 90\" stroke=\"#d4956a\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"12\" cy=\"87\" rx=\"8\" ry=\"9\" fill=\"#d4956a\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n    </svg>"}, {"num": 20, "pcap": "👑 Regina Isabella – momento di riflessione", "bubbles": [{"who": "👑 REGINA ISABELLA", "text": "«Il progresso ha portato ricchezze che ci permettono di elevarci. Eppure, che valore ha un regno che si fonda sulla sofferenza?»"}, {"who": "👑 REGINA ISABELLA", "text": "«Noi che diciamo di ispirarci ai valori di Dio, abbiamo preso il suo ruolo di giudice supremo. I popoli del Nuovo Mondo sono creature di Dio quanto noi.»"}, {"who": "👑 REGINA ISABELLA", "text": "«La grandezza della Spagna non può poggiare sul silenzio dei deboli.»"}], "svg": "<svg width=\"115\" height=\"150\" viewBox=\"0 0 115 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M16 150 Q20 108 57 100 Q94 108 98 150Z\" fill=\"#6b1a6b\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M34 108 Q57 100 80 108 L76 124 H38Z\" fill=\"#8b2a8b\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <ellipse cx=\"57\" cy=\"54\" rx=\"23\" ry=\"24\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2.2\"/>\n      <path d=\"M34 46 L38 28 L47 42 L57 26 L67 42 L76 28 L80 46Z\" fill=\"#d4a017\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <rect x=\"34\" y=\"44\" width=\"46\" height=\"9\" rx=\"3\" fill=\"#b8860b\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"47\" cy=\"49\" r=\"3\" fill=\"#c0392b\"/>\n      <circle cx=\"57\" cy=\"49\" r=\"3\" fill=\"#2980b9\"/>\n      <circle cx=\"67\" cy=\"49\" r=\"3\" fill=\"#27ae60\"/>\n      <path d=\"M34 60 Q28 74 30 90\" stroke=\"#e8d5a3\" stroke-width=\"4\" stroke-linecap=\"round\" opacity=\".8\"/>\n      <path d=\"M80 60 Q86 74 84 90\" stroke=\"#e8d5a3\" stroke-width=\"4\" stroke-linecap=\"round\" opacity=\".8\"/>\n      <!-- downcast eyes -->\n      <ellipse cx=\"48\" cy=\"58\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"49\" cy=\"60\" r=\"2.5\" fill=\"#2a1808\"/>\n      <ellipse cx=\"66\" cy=\"58\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"67\" cy=\"60\" r=\"2.5\" fill=\"#2a1808\"/>\n      <path d=\"M44 52 Q48 48 52 51\" stroke=\"#3a2010\" stroke-width=\"1.8\" fill=\"none\"/>\n      <path d=\"M62 51 Q66 48 70 52\" stroke=\"#3a2010\" stroke-width=\"1.8\" fill=\"none\"/>\n      <!-- sad mouth -->\n      <path d=\"M48 70 Q57 66 66 70\" stroke=\"#1a1008\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- hand on chin thoughtful -->\n      <path d=\"M34 118 Q22 104 24 88\" stroke=\"#f5dcb0\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n      <ellipse cx=\"24\" cy=\"85\" rx=\"9\" ry=\"10\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- thought bubble -->\n      <circle cx=\"88\" cy=\"28\" r=\"18\" fill=\"#fffff0\" stroke=\"#1a1008\" stroke-width=\"1.5\" opacity=\".95\"/>\n      <circle cx=\"74\" cy=\"46\" r=\"5\" fill=\"#fffff0\" stroke=\"#1a1008\" stroke-width=\"1\" opacity=\".9\"/>\n      <circle cx=\"70\" cy=\"55\" r=\"3\" fill=\"#fffff0\" stroke=\"#1a1008\" stroke-width=\"1\" opacity=\".85\"/>\n      <text x=\"88\" y=\"24\" text-anchor=\"middle\" font-family=\"'Patrick Hand',cursive\" font-size=\"7.5\" fill=\"#c0392b\">Che valore ha</text>\n      <text x=\"88\" y=\"34\" text-anchor=\"middle\" font-family=\"'Patrick Hand',cursive\" font-size=\"7.5\" fill=\"#c0392b\">un regno fondato</text>\n      <text x=\"88\" y=\"44\" text-anchor=\"middle\" font-family=\"'Patrick Hand',cursive\" font-size=\"7.5\" fill=\"#c0392b\">sul dolore?</text>\n    </svg>"}, {"num": 21, "pcap": "⚓ Colombo – difesa finale", "bubbles": [{"who": "⚓ COLOMBO", "text": "«Io non ho fatto altro che seguire un sogno e servire il mio re e la mia regina.»"}, {"who": "⚓ COLOMBO", "text": "«Volevo nuove rotte, non uno sterminio.»"}], "svg": "<svg width=\"105\" height=\"135\" viewBox=\"0 0 105 135\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M14 135 Q18 96 52 88 Q86 96 90 135Z\" fill=\"#c0392b\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M30 98 Q52 90 74 98 L70 114 H34Z\" fill=\"#d4a040\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <ellipse cx=\"52\" cy=\"50\" rx=\"21\" ry=\"22\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M31 46 Q52 22 73 46\" fill=\"#2a1808\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M31 46 Q24 60 27 74\" stroke=\"#2a1808\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M73 46 Q80 60 77 74\" stroke=\"#2a1808\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M36 50 Q42 44 48 49\" stroke=\"#2a1808\" stroke-width=\"2.2\" fill=\"none\"/>\n      <path d=\"M56 49 Q62 44 68 50\" stroke=\"#2a1808\" stroke-width=\"2.2\" fill=\"none\"/>\n      <ellipse cx=\"42\" cy=\"55\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"43\" cy=\"56\" r=\"2.5\" fill=\"#2a1808\"/>\n      <ellipse cx=\"62\" cy=\"55\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"63\" cy=\"56\" r=\"2.5\" fill=\"#2a1808\"/>\n      <path d=\"M44 67 Q52 71 60 67\" stroke=\"#1a1008\" stroke-width=\"1.8\" fill=\"none\"/>\n      <path d=\"M34 66 Q52 80 70 66 Q64 80 52 82 Q40 80 34 66Z\" fill=\"#3a2010\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n    </svg>"}, {"num": 22, "pcap": "⚖️ Il Giudice interrompe tutti", "bubbles": [{"who": "⚖️ GIUDICE", "text": "«BASTA!»"}, {"who": "⚖️ GIUDICE", "text": "«È chiaro che la scoperta porta con sé due volti: gloria e violazione.»"}, {"who": "⚖️ GIUDICE", "text": "«Questo processo non può cancellare ciò che è accaduto. Ma forse può insegnarci che ogni scoperta porta delle responsabilità.»"}, {"who": "⚖️ GIUDICE", "text": "«Non spetta né a me, né a noi dare oggi l'ultima parola, ma alla storia e a chi la ricorderà.»"}], "svg": "<svg width=\"110\" height=\"140\" viewBox=\"0 0 110 140\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M16 140 Q20 98 55 90 Q90 98 94 140Z\" fill=\"#2a2860\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M32 92 Q55 86 78 92 L74 106 H36Z\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <ellipse cx=\"55\" cy=\"50\" rx=\"22\" ry=\"22\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M33 46 Q44 22 55 20 Q66 22 77 46\" fill=\"#e0ddd0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M33 46 Q26 62 30 78\" stroke=\"#e0ddd0\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M77 46 Q84 62 80 78\" stroke=\"#e0ddd0\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M38 46 Q43 41 48 45\" stroke=\"#3a2010\" stroke-width=\"2.5\" fill=\"none\"/>\n      <path d=\"M62 45 Q67 41 72 46\" stroke=\"#3a2010\" stroke-width=\"2.5\" fill=\"none\"/>\n      <ellipse cx=\"43\" cy=\"51\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"43\" cy=\"52\" r=\"2.5\" fill=\"#1a1008\"/>\n      <ellipse cx=\"67\" cy=\"51\" rx=\"4\" ry=\"4.5\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"67\" cy=\"52\" r=\"2.5\" fill=\"#1a1008\"/>\n      <path d=\"M44 64 Q55 61 66 64\" stroke=\"#1a1008\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- gavel SLAMMING with lines -->\n      <path d=\"M72 96 Q84 82 88 70\" stroke=\"#f5dcb0\" stroke-width=\"8\" stroke-linecap=\"round\"/>\n      <rect x=\"84\" y=\"62\" width=\"18\" height=\"10\" rx=\"3\" fill=\"#4a2a08\" stroke=\"#1a1008\" stroke-width=\"1.2\" transform=\"rotate(20 84 62)\"/>\n      <rect x=\"88\" y=\"66\" width=\"6\" height=\"20\" rx=\"2\" fill=\"#6a3a10\" stroke=\"#1a1008\" stroke-width=\"1\" transform=\"rotate(20 84 62)\"/>\n      <!-- impact lines -->\n      <path d=\"M96 56 L102 50\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M100 62 L108 60\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M98 50 L102 44\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n    </svg>"}, {"num": 23, "pcap": "⚖️ Il Giudice legge la Sentenza – tutti in piedi", "bubbles": [{"who": "⚖️ GIUDICE", "text": "«Ammiraglio Cristoforo Colombo, la Corte riconosce in voi il volto dell'uomo che ha cambiato la storia, un uomo grazie al cui sapere e coraggio possiamo oggi godere di prodotti e ricchezze altrimenti sconosciute.»"}, {"who": "⚖️ GIUDICE", "text": "«Un uomo che darà avvio a un periodo storico nuovo, una nuova epoca, che i posteri studieranno con ammirazione.»"}, {"who": "⚖️ GIUDICE", "text": "«Tuttavia, grazie al dibattito oggi affrontato, dobbiamo riconoscere anche che la vostra impresa ha aperto la via a un susseguirsi di violenze e ingiustizie nei confronti delle popolazioni indigene.»"}, {"who": "⚖️ GIUDICE", "text": "«La vostra impresa avrà sempre uno scheletro addosso. La gloria e la colpa cammineranno insieme nel vostro nome.»"}], "svg": "<svg width=\"100%\" viewBox=\"0 0 580 180\" xmlns=\"http://www.w3.org/2000/svg\" style=\"max-width:580px\">\n      <!-- floor -->\n      <rect x=\"0\" y=\"148\" width=\"580\" height=\"32\" fill=\"#c9a96e\" opacity=\".5\"/>\n      <!-- back wall -->\n      <rect x=\"0\" y=\"0\" width=\"580\" height=\"150\" fill=\"#f0e0c0\" opacity=\".4\"/>\n      <!-- scroll on bench -->\n      <rect x=\"222\" y=\"80\" width=\"136\" height=\"72\" rx=\"4\" fill=\"#fdf3d0\" stroke=\"#c0392b\" stroke-width=\"2\"/>\n      <line x1=\"230\" y1=\"92\" x2=\"350\" y2=\"92\" stroke=\"#c0392b\" stroke-width=\"1.2\"/>\n      <line x1=\"230\" y1=\"102\" x2=\"350\" y2=\"102\" stroke=\"#8b5e2a\" stroke-width=\"1\"/>\n      <line x1=\"230\" y1=\"112\" x2=\"350\" y2=\"112\" stroke=\"#8b5e2a\" stroke-width=\"1\"/>\n      <line x1=\"230\" y1=\"122\" x2=\"340\" y2=\"122\" stroke=\"#8b5e2a\" stroke-width=\"1\"/>\n      <line x1=\"230\" y1=\"132\" x2=\"320\" y2=\"132\" stroke=\"#8b5e2a\" stroke-width=\"1\"/>\n      <!-- bench -->\n      <rect x=\"200\" y=\"76\" width=\"180\" height=\"72\" rx=\"3\" fill=\"#8b5e2a\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- judge at bench -->\n      <path d=\"M262 76 Q290 68 318 76 L314 148 H266Z\" fill=\"#2a2860\" stroke=\"#1a1008\" stroke-width=\"1.8\"/>\n      <path d=\"M272 70 Q290 62 308 70 L304 80 H276Z\" fill=\"#f0f0e8\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <circle cx=\"290\" cy=\"50\" r=\"20\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M270 46 Q280 24 290 22 Q300 24 310 46\" fill=\"#e0ddd0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M270 46 Q263 60 266 72\" stroke=\"#e0ddd0\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n      <path d=\"M310 46 Q317 60 314 72\" stroke=\"#e0ddd0\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n      <circle cx=\"282\" cy=\"50\" r=\"3.5\" fill=\"#1a1008\"/>\n      <circle cx=\"298\" cy=\"50\" r=\"3.5\" fill=\"#1a1008\"/>\n      <path d=\"M283 60 Q290 57 297 60\" stroke=\"#1a1008\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- colombo left head bowed -->\n      <path d=\"M80 148 Q84 108 114 100 Q144 108 148 148Z\" fill=\"#c0392b\" stroke=\"#1a1008\" stroke-width=\"1.8\"/>\n      <circle cx=\"114\" cy=\"82\" r=\"19\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"1.8\"/>\n      <path d=\"M95 78 Q114 58 133 78\" fill=\"#2a1808\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"106\" cy=\"84\" r=\"3\" fill=\"#2a1808\"/>\n      <circle cx=\"122\" cy=\"84\" r=\"3\" fill=\"#2a1808\"/>\n      <!-- head bowed -->\n      <path d=\"M99 90 Q114 96 129 90\" stroke=\"#3a2010\" stroke-width=\"2\" fill=\"none\"/>\n      <!-- frate right side -->\n      <path d=\"M432 148 Q436 108 466 100 Q496 108 500 148Z\" fill=\"#6b4a1a\" stroke=\"#1a1008\" stroke-width=\"1.8\"/>\n      <path d=\"M449 92 Q466 82 483 92\" fill=\"#5a3a10\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"466\" cy=\"78\" r=\"19\" fill=\"#d4b07a\" stroke=\"#1a1008\" stroke-width=\"1.8\"/>\n      <circle cx=\"457\" cy=\"82\" r=\"3\" fill=\"#1a1008\"/>\n      <circle cx=\"475\" cy=\"82\" r=\"3\" fill=\"#1a1008\"/>\n      <!-- isabella background -->\n      <path d=\"M158 148 Q162 108 190 100 Q218 108 222 148Z\" fill=\"#6b1a6b\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"190\" cy=\"78\" r=\"17\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M174 70 L177 58 L183 68 L190 54 L197 68 L203 58 L206 70Z\" fill=\"#d4a017\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <!-- merchant background -->\n      <path d=\"M358 148 Q362 108 390 100 Q418 108 422 148Z\" fill=\"#5a4a1a\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <circle cx=\"390\" cy=\"78\" r=\"17\" fill=\"#e8c880\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <ellipse cx=\"390\" cy=\"62\" rx=\"20\" ry=\"7\" fill=\"#3a2810\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <!-- taino small behind -->\n      <circle cx=\"510\" cy=\"80\" r=\"15\" fill=\"#c87830\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M495 76 Q510 60 525 76\" fill=\"#1a0a00\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <!-- light rays from scroll -->\n      <path d=\"M290 80 L200 148\" stroke=\"#d4a017\" stroke-width=\".5\" opacity=\".3\"/>\n      <path d=\"M290 80 L380 148\" stroke=\"#d4a017\" stroke-width=\".5\" opacity=\".3\"/>\n      <path d=\"M290 80 L100 148\" stroke=\"#d4a017\" stroke-width=\".5\" opacity=\".2\"/>\n      <path d=\"M290 80 L480 148\" stroke=\"#d4a017\" stroke-width=\".5\" opacity=\".2\"/>\n    </svg>"}, {"num": 24, "pcap": "⚓ Colombo – l'ultima parola", "bubbles": [{"who": "⚓ COLOMBO", "text": "«Se la mia impresa ha portato dolore, possa Dio perdonarmi.»"}, {"who": "⚓ COLOMBO", "text": "«Ma sappiate che ho navigato per un sogno di conoscenza e di fede che mi porto dentro sin dalla tenera età, quando ammiravo le navi salpare e sognavo terre sconosciute.»"}, {"who": "⚓ COLOMBO", "text": "«Mi rimetto a voi, come uomo e come cristiano. Lasciate che la storia giudichi meglio di noi.»"}], "svg": "<svg width=\"110\" height=\"145\" viewBox=\"0 0 110 145\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- colombo head bowed, repentant -->\n      <path d=\"M14 145 Q18 100 55 92 Q92 100 96 145Z\" fill=\"#922b21\" stroke=\"#1a1008\" stroke-width=\"2\"/>\n      <path d=\"M32 104 Q55 96 78 104 L74 118 H36Z\" fill=\"#d4a040\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- head tilted down -->\n      <ellipse cx=\"55\" cy=\"52\" rx=\"22\" ry=\"22\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"2\" transform=\"rotate(15 55 52)\"/>\n      <path d=\"M34 46 Q55 22 76 46\" fill=\"#2a1808\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <path d=\"M34 46 Q27 60 30 74\" stroke=\"#2a1808\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <path d=\"M76 46 Q83 60 80 74\" stroke=\"#2a1808\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n      <!-- sad drooping eyes -->\n      <ellipse cx=\"44\" cy=\"56\" rx=\"4\" ry=\"4\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"44\" cy=\"57\" r=\"2.2\" fill=\"#2a1808\"/>\n      <ellipse cx=\"66\" cy=\"58\" rx=\"4\" ry=\"4\" fill=\"white\" stroke=\"#1a1008\" stroke-width=\"1.2\"/>\n      <circle cx=\"66\" cy=\"59\" r=\"2.2\" fill=\"#2a1808\"/>\n      <!-- single tear -->\n      <path d=\"M42 62 Q40 68 42 74\" stroke=\"#6ab0d4\" stroke-width=\"2\" stroke-linecap=\"round\" fill=\"none\"/>\n      <!-- sad mouth -->\n      <path d=\"M47 70 Q55 66 63 70\" stroke=\"#1a1008\" stroke-width=\"1.8\" fill=\"none\"/>\n      <path d=\"M36 68 Q55 82 74 68 Q68 82 55 84 Q42 82 36 68Z\" fill=\"#3a2010\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n      <!-- hands clasped in prayer -->\n      <path d=\"M30 118 Q20 106 22 92\" stroke=\"#f5dcb0\" stroke-width=\"8\" stroke-linecap=\"round\"/>\n      <path d=\"M80 118 Q90 106 88 92\" stroke=\"#f5dcb0\" stroke-width=\"8\" stroke-linecap=\"round\"/>\n      <!-- clasped hands center -->\n      <ellipse cx=\"55\" cy=\"130\" rx=\"14\" ry=\"10\" fill=\"#f5dcb0\" stroke=\"#1a1008\" stroke-width=\"1.5\"/>\n    </svg>"}, {"num": 25, "pcap": "📜 Il Cronista – Epilogo finale", "bubbles": [{"who": "", "text": "«Così si chiude il processo all'Ammiraglio Cristoforo Colombo. Le voci hanno parlato: c'è chi vede Colombo come un eroe e chi come conquistatore colpevole.»"}, {"who": "", "text": "«Gli archivi della storia conserveranno le sue mappe e le sue colpe. Le onde dell'Oceano porteranno per sempre la sua memoria, tra luce e ombra, tra scoperta e conquista.»"}, {"who": "", "text": "«Una domanda resta ferma nella mente: chi paga il prezzo della scoperta?»"}], "svg": "<svg width=\"115\" height=\"150\" viewBox=\"0 0 115 150\" xmlns=\"http://www.w3.org/2000/svg\">\n      <!-- sky gradient -->\n      <rect x=\"0\" y=\"0\" width=\"115\" height=\"90\" fill=\"#f5c880\" opacity=\".5\"/>\n      <rect x=\"0\" y=\"60\" width=\"115\" height=\"30\" fill=\"#e87040\" opacity=\".3\"/>\n      <!-- sun setting -->\n      <circle cx=\"80\" cy=\"55\" r=\"20\" fill=\"#f5c040\" opacity=\".7\"/>\n      <path d=\"M0 80 Q57 70 115 80 L115 150 L0 150Z\" fill=\"#2a5a8a\" opacity=\".7\"/>\n      <!-- waves -->\n      <path d=\"M0 95 Q15 88 30 95 Q45 102 60 95 Q75 88 90 95 Q105 102 115 95\" stroke=\"#6ab0d4\" stroke-width=\"2\" fill=\"none\"/>\n      <path d=\"M0 110 Q15 104 30 110 Q45 116 60 110 Q75 104 90 110 Q105 116 115 110\" stroke=\"#4a90b4\" stroke-width=\"1.5\" fill=\"none\"/>\n      <!-- ship small on horizon -->\n      <rect x=\"42\" y=\"74\" width=\"30\" height=\"12\" rx=\"2\" fill=\"#2a1808\" opacity=\".9\"/>\n      <rect x=\"56\" y=\"44\" width=\"3\" height=\"32\" fill=\"#2a1808\" opacity=\".9\"/>\n      <path d=\"M59 46 L74 60 L59 64Z\" fill=\"#f5e9cc\" opacity=\".85\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <path d=\"M57 48 L43 60 L57 64Z\" fill=\"#f5e9cc\" opacity=\".85\" stroke=\"#1a1008\" stroke-width=\".8\"/>\n      <!-- cronista silhouette foreground writing -->\n      <path d=\"M8 150 Q10 120 24 114 Q38 120 40 150Z\" fill=\"#2a1808\" opacity=\".85\"/>\n      <circle cx=\"24\" cy=\"104\" r=\"12\" fill=\"#2a1808\" opacity=\".85\"/>\n      <!-- quill -->\n      <path d=\"M34 116 Q28 106 32 100 Q28 110 34 116Z\" fill=\"#e8e8d8\" opacity=\".9\"/>\n      <!-- scroll in hand -->\n      <rect x=\"8\" y=\"116\" width=\"20\" height=\"22\" rx=\"2\" fill=\"#fdf3d0\" opacity=\".9\" stroke=\"#1a1008\" stroke-width=\"1\"/>\n      <!-- question mark in sky -->\n      <text x=\"88\" y=\"42\" font-family=\"'Schoolbell',cursive\" font-size=\"28\" fill=\"#c0392b\" opacity=\".4\">?</text>\n    </svg>"}];
+
+// voice configs: pitch / rate per character key
+const VCFG = {
+  'GIUDICE':         {pitch:.78, rate:.88, color:'#2471a3'},
+  'COLOMBO':         {pitch:1.08,rate:.96, color:'#c0392b'},
+  'REGINA ISABELLA': {pitch:1.35,rate:.88, color:'#7d3c98'},
+  'MARINAIO PAOLO':  {pitch:1.02,rate:.98, color:'#d35400'},
+  'GAROCUYA':        {pitch:1.12,rate:.92, color:'#1e8449'},
+  "FRA' BARTOLOMEO": {pitch:.72, rate:.82, color:'#784212'},
+  'MERCANTE':        {pitch:1.18,rate:1.06,color:'#e67e22'},
+  'MERCANTE DI SIVIGLIA':{pitch:1.18,rate:1.06,color:'#e67e22'},
+  '':                {pitch:.92, rate:.86, color:'#555'},
+};
+
+// ── STATE ─────────────────────────────────────────────────────────
+let pi=0, bi=0, playing=false, spd=1;
+let itVoice=null, voicesReady=false;
+
+// ── SAFARI VOICE UNLOCK ───────────────────────────────────────────
+// Safari requires speechSynthesis to be triggered inside a user gesture.
+// We fire a silent utterance on unlock click, which primes the engine.
+function unlockAudio() {
+  const u = new SpeechSynthesisUtterance(' ');
+  u.volume = 0;
+  u.lang = 'it-IT';
+  u.onend = () => {
+    voicesReady = true;
+    pickItalianVoice();
+    document.getElementById('vp-unlock').classList.add('hidden');
+    renderPanel(pi);
+    renderBub(pi, bi);
+    buildThumbs();
+  };
+  u.onerror = () => {
+    // Even on error, proceed — voice may still work
+    voicesReady = true;
+    document.getElementById('vp-unlock').classList.add('hidden');
+    renderPanel(pi);
+    renderBub(pi, bi);
+    buildThumbs();
+  };
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(u);
+}
+
+function pickItalianVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  // Prefer Italian voices; on Safari these are: Alice, Federica, Luca
+  const preferred = ['Alice','Federica','Luca','Google italiano','it-IT'];
+  for (const name of preferred) {
+    const v = voices.find(v => v.name.includes(name) || v.lang.startsWith('it'));
+    if (v) { itVoice = v; break; }
+  }
+  if (!itVoice) itVoice = voices.find(v => v.lang.startsWith('it')) || null;
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────
+function vcfg(who) {
+  const k = Object.keys(VCFG).find(k => k && who.toUpperCase().includes(k));
+  return VCFG[k || ''];
+}
+
+function totalBubs() { return PANELS.reduce((s,p)=>s+Math.max(p.bubbles.length,1),0); }
+function bubsBefore(pi2) {
+  let s=0; for(let i=0;i<pi2;i++) s+=Math.max(PANELS[i].bubbles.length,1); return s;
+}
+
+// ── RENDER ────────────────────────────────────────────────────────
+function renderPanel(idx) {
+  const p=PANELS[idx];
+  const el=document.getElementById('vp-panel');
+  el.classList.add('fade');
+  setTimeout(()=>{
+    document.getElementById('vp-svg').innerHTML = p.svg||'';
+    document.getElementById('vp-cap').textContent = p.pcap;
+    document.getElementById('vp-info').textContent = (idx+1)+' / '+PANELS.length;
+    // thumbs
+    document.querySelectorAll('.vp-th').forEach((t,i)=>{
+      t.classList.toggle('on', i===idx);
+      if(i===idx) t.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+    });
+    el.classList.remove('fade');
+  },240);
+}
+
+function renderBub(panelIdx, bubIdx) {
+  const p=PANELS[panelIdx];
+  const bub=p.bubbles[bubIdx];
+  if(!bub){
+    document.getElementById('vp-who').textContent='';
+    document.getElementById('vp-txt').textContent='';
+    return;
+  }
+  const cfg=vcfg(bub.who);
+  document.getElementById('vp-who').textContent = bub.who||'Narratore';
+  document.getElementById('vp-who').style.color = cfg?cfg.color:'#555';
+  // word spans for highlight
+  const words=bub.text.split(/\s+/);
+  document.getElementById('vp-txt').innerHTML =
+    words.map((w,i)=>`<span class="w" id="w${i}">${w}</span>`).join(' ');
+  // progress
+  const done=bubsBefore(panelIdx)+bubIdx;
+  document.getElementById('vp-prog-fill').style.width=
+    ((done/totalBubs())*100)+'%';
+}
+
+// ── SPEECH (Safari-safe) ──────────────────────────────────────────
+// Safari often ignores queued utterances. Strategy:
+// 1. Always cancel before speaking
+// 2. Small delay after cancel
+// 3. Periodic watchdog to detect stalled synthesis
+
+let _watchdog=null;
+let _lastSpokenBub = '';
+
+function speak(panelIdx, bubIdx) {
+  if(!playing) return;
+  const p=PANELS[panelIdx];
+  if(!p.bubbles.length){
+    setTimeout(()=>advance(), 1600);
+    return;
+  }
+  const bub=p.bubbles[bubIdx];
+  if(!bub){ advance(); return; }
+
+  renderBub(panelIdx, bubIdx);
+
+  // Cancel any queued/active speech
+  window.speechSynthesis.cancel();
+
+  // MUST wait a tick after cancel on Safari
+  setTimeout(()=>{
+    if(!playing) return;
+    const cfg = vcfg(bub.who);
+    const rawText = bub.text.replace(/[«»""]/g,'').trim();
+    _lastSpokenBub = rawText;
+
+    const u = new SpeechSynthesisUtterance(rawText);
+    u.lang   = 'it-IT';
+    u.pitch  = cfg ? cfg.pitch : 1;
+    u.rate   = (cfg ? cfg.rate : 0.9) * spd;
+    u.volume = 1;
+    if(itVoice) u.voice = itVoice;
+
+    // Karaoke highlight
+    const words = rawText.split(/\s+/);
+    u.onboundary = (e) => {
+      if(e.name!=='word') return;
+      document.querySelectorAll('.w.hi').forEach(el=>el.classList.remove('hi'));
+      let cc=0, wi=0;
+      for(let i=0;i<words.length;i++){
+        if(cc>=e.charIndex){wi=i;break;}
+        cc+=words[i].length+1;
+      }
+      const wEl=document.getElementById('w'+wi);
+      if(wEl) wEl.classList.add('hi');
+    };
+
+    document.getElementById('vp-who').classList.add('spk');
+
+    u.onend = ()=>{
+      clearWatchdog();
+      document.getElementById('vp-who').classList.remove('spk');
+      document.querySelectorAll('.w.hi').forEach(el=>el.classList.remove('hi'));
+      if(playing) setTimeout(()=>advance(), 380);
+    };
+    u.onerror = (e)=>{
+      clearWatchdog();
+      document.getElementById('vp-who').classList.remove('spk');
+      if(playing) setTimeout(()=>advance(), 500);
+    };
+
+    window.speechSynthesis.speak(u);
+    startWatchdog(rawText.length);
+  }, 80); // 80ms delay — critical for Safari
+}
+
+// Watchdog: if synthesis gets stuck (Safari bug), force-advance
+function startWatchdog(textLen) {
+  clearWatchdog();
+  // Estimate max duration: ~50ms per char at normal rate, + 3s buffer
+  const maxMs = Math.max((textLen / (spd*3.5))*1000 + 3000, 5000);
+  _watchdog = setTimeout(()=>{
+    if(playing && !window.speechSynthesis.speaking){
+      document.getElementById('vp-who').classList.remove('spk');
+      advance();
+    }
+  }, maxMs);
+}
+function clearWatchdog(){ if(_watchdog){clearTimeout(_watchdog);_watchdog=null;} }
+
+// ── ADVANCE ───────────────────────────────────────────────────────
+function advance() {
+  if(!playing) return;
+  const p=PANELS[pi];
+  if(bi < p.bubbles.length-1){
+    bi++; speak(pi, bi);
+  } else if(pi < PANELS.length-1){
+    pi++; bi=0;
+    renderPanel(pi);
+    setTimeout(()=>speak(pi,bi), 600);
+  } else {
+    playing=false; updateBtns();
+    document.getElementById('vp-prog-fill').style.width='100%';
+    document.getElementById('vp-who').textContent='🎬 Fine!';
+    document.getElementById('vp-who').style.color='#c0392b';
+    document.getElementById('vp-txt').innerHTML='<em>Il processo è concluso.</em>';
+  }
+  updateBtns();
+}
+
+// ── CONTROLS ──────────────────────────────────────────────────────
+function vpPlay(){
+  if(playing) return;
+  playing=true; updateBtns();
+  speak(pi, bi);
+}
+function vpPause(){
+  playing=false;
+  window.speechSynthesis.cancel();
+  clearWatchdog();
+  document.getElementById('vp-who').classList.remove('spk');
+  updateBtns();
+}
+function vpPrev(){
+  window.speechSynthesis.cancel(); clearWatchdog();
+  document.getElementById('vp-who').classList.remove('spk');
+  if(bi>0){ bi--; }
+  else if(pi>0){ pi--; bi=Math.max(0,PANELS[pi].bubbles.length-1); renderPanel(pi); }
+  renderBub(pi,bi);
+  if(playing) setTimeout(()=>speak(pi,bi),300);
+  updateBtns();
+}
+function vpNext(){
+  window.speechSynthesis.cancel(); clearWatchdog();
+  document.getElementById('vp-who').classList.remove('spk');
+  const p=PANELS[pi];
+  if(bi<p.bubbles.length-1){ bi++; }
+  else if(pi<PANELS.length-1){ pi++; bi=0; renderPanel(pi); }
+  renderBub(pi,bi);
+  if(playing) setTimeout(()=>speak(pi,bi),300);
+  updateBtns();
+}
+function vpOpen(){
+  pi=0; bi=0; playing=false;
+  document.getElementById('vp-overlay').classList.remove('hidden');
+  document.getElementById('vp-unlock').classList.remove('hidden');
+  updateBtns();
+}
+function vpClose(){
+  window.speechSynthesis.cancel(); clearWatchdog(); playing=false;
+  document.getElementById('vp-overlay').classList.add('hidden');
+  updateBtns();
+}
+function jumpTo(idx){
+  window.speechSynthesis.cancel(); clearWatchdog();
+  document.getElementById('vp-who').classList.remove('spk');
+  pi=idx; bi=0; renderPanel(idx); renderBub(idx,0);
+  if(playing) setTimeout(()=>speak(pi,bi),500);
+  updateBtns();
+}
+function setSpd(v){ spd=parseFloat(v); }
+function progClick(e){
+  const track=document.getElementById('vp-prog-track');
+  const ratio=e.offsetX/track.offsetWidth;
+  const tot=totalBubs();
+  let tgt=Math.floor(ratio*tot), acc=0;
+  for(let i=0;i<PANELS.length;i++){
+    const b=Math.max(PANELS[i].bubbles.length,1);
+    if(acc+b>tgt){
+      window.speechSynthesis.cancel(); clearWatchdog();
+      pi=i; bi=Math.min(tgt-acc, Math.max(0,PANELS[i].bubbles.length-1));
+      renderPanel(pi); renderBub(pi,bi);
+      if(playing) setTimeout(()=>speak(pi,bi),400);
+      updateBtns(); return;
+    }
+    acc+=b;
+  }
+}
+function updateBtns(){
+  document.getElementById('btn-play').style.display  = playing?'none':'inline-flex';
+  document.getElementById('btn-pause').style.display = playing?'inline-flex':'none';
+}
+
+// ── THUMBS ────────────────────────────────────────────────────────
+function buildThumbs(){
+  const strip=document.getElementById('vp-thumbs');
+  if(strip.children.length) return;
+  PANELS.forEach((p,i)=>{
+    const d=document.createElement('div');
+    d.className='vp-th'; d.title=p.pcap;
+    if(p.svg){
+      // shrink the SVG for thumbnail
+      const tmp=p.svg
+        .replace(/width="[^"]*"/, 'width="44"')
+        .replace(/height="[^"]*"/, 'height="33"')
+        .replace(/style="max-width:[^"]*"/, '');
+      d.innerHTML=tmp;
+    } else {
+      d.textContent=i+1;
+    }
+    d.onclick=()=>jumpTo(i);
+    strip.appendChild(d);
+  });
+}
+
+// Attempt to load voices on page load (non-Safari will succeed here)
+if(window.speechSynthesis){
+  window.speechSynthesis.onvoiceschanged = pickItalianVoice;
+  pickItalianVoice();
+}
+</script>
+
+</body>
+</html>
